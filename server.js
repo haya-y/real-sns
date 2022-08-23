@@ -5,7 +5,7 @@ const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
 const PORT = 3000;
 const mongoose = require('mongoose');
-require('dotenv').config()
+require('dotenv').config();
 
 // Connect database
 mongoose
@@ -18,8 +18,13 @@ mongoose
   });
 
 // Middleware
+app.use(express.json())
 app.use('/api/users', userRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/posts', postRoute);
+
+app.get('/', (req, res) => {
+  res.send('hello world');
+});
 
 app.listen(PORT, () => console.log('server running'));
