@@ -1,5 +1,5 @@
 import React from 'react';
-import './Home.css'
+import './Home.css';
 import Rightbar from '../../components/rightbar/Rightbar';
 import Topbar from '../../components/topbar/Topbar';
 import Sidebar from '../../components/sidebar/Sidebar';
@@ -11,8 +11,8 @@ export default function Home() {
       <Topbar />
       <div className="homeContainer">
         <Sidebar />
-        {/* <TimeLine />
-        <Rightbar /> */}
+        <TimeLine />
+        <Rightbar />
       </div>
     </>
   );
