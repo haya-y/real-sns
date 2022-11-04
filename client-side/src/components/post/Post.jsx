@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import './Post.css';
 import { MoreVert } from '@mui/icons-material';
 import { Users } from '../../dummyData';
 
 export default function Post({ post }) {
+  const [like, setLike] = useState(post.like);
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleLike = useCallback(() => {
+    setLike(isLiked ? like - 1 : like + 1);
+    setIsLiked(!isLiked);
+  }, [like, setLike, isLiked]);
+
   return (
     <div className='post'>
       <div className='postWrapper'>
@@ -21,10 +29,10 @@ export default function Post({ post }) {
           <span className='postText'>{post.desc}</span>
           <img src={post.photo} alt='' className='postImg' />
         </div>
-        <div className='postBottom'>
+        <div className='postBottom' onClick={() => handleLike()}>
           <div className='postBottomLeft'>
             <img src='./assets/heart.png' alt='likeIcon' />
-            <span className='postLikeCounter'>{post.like}人がいいねを押しました。</span>
+            <span className='postLikeCounter'>{like}人がいいねを押しました。</span>
           </div>
           <div className='postBottomRight'>
             <span className='postCommentText'>{post.comment}: コメント</span>

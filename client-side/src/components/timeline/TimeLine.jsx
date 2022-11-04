@@ -10,7 +10,7 @@ export default function TimeLine() {
       <div className='timelineWrapper'>
         <Share />
         {Posts.map((post) => (
-          <Post post={post} id={post.id} />
+          <Post post={post} key={post.id} />
         ))}
       </div>
     </div>
