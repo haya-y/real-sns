@@ -1,13 +1,24 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './Post.css';
 import { MoreVert } from '@mui/icons-material';
-import { Users } from '../../dummyData';
+// import { Users } from '../../dummyData';
+import axios from 'axios';
 
 export default function Post({ post }) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const [like, setLike] = useState(post.like);
   const [isLiked, setIsLiked] = useState(false);
+  const [users, setUsers] = useState({});
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await axios.get(`/users/${post.userId}`);
+      console.log({ response });
+      setUsers(response.data);
+    };
+    fetchUsers();
+  }, []);
 
   const handleLike = useCallback(() => {
     setLike(isLiked ? like - 1 : like + 1);
@@ -20,11 +31,11 @@ export default function Post({ post }) {
         <div className='postTop'>
           <div className='postTopLeft'>
             <img
-              src={PUBLIC_FOLDER + Users.find((user) => user.id === post.id).profilePicture}
+              src={users.profilePicture}
               alt=''
               className='postProfileImg'
             />
-            <span className='postUserName'>{Users.find((user) => user.id === post.id).username}</span>
+            <span className='postUserName'>{users.username}</span>
             <span className='postDate'>{post.date}</span>
           </div>
           <div className='postTopRight'>
