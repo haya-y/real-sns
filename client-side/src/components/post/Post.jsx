@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './Post.css';
 import { MoreVert } from '@mui/icons-material';
-// import { Users } from '../../dummyData';
 import axios from 'axios';
+import { format, render, cancel, register } from 'timeago.js';
 
 export default function Post({ post }) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -36,7 +36,7 @@ export default function Post({ post }) {
               className='postProfileImg'
             />
             <span className='postUserName'>{users.username}</span>
-            <span className='postDate'>{post.date}</span>
+            <span className='postDate'>{format(post.createdAt)}</span>
           </div>
           <div className='postTopRight'>
             <MoreVert />
