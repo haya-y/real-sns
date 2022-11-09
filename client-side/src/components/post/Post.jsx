@@ -31,7 +31,7 @@ export default function Post({ post }) {
         <div className='postTop'>
           <div className='postTopLeft'>
             <img
-              src={users.profilePicture}
+              src={users.profilePicture || PUBLIC_FOLDER + "/person/noAvatar.png"}
               alt=''
               className='postProfileImg'
             />
@@ -44,7 +44,7 @@ export default function Post({ post }) {
         </div>
         <div className='postCenter'>
           <span className='postText'>{post.desc}</span>
-          <img src={PUBLIC_FOLDER + post.photo} alt='' className='postImg' />
+          <img src={PUBLIC_FOLDER + post.img} alt='' className='postImg' />
         </div>
         <div className='postBottom' onClick={() => handleLike()}>
           <div className='postBottomLeft'>
