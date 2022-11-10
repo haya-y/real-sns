@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React,{useEffect,useState} from 'react';
 import Rightbar from '../../components/rightbar/Rightbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import TimeLine from '../../components/timeline/TimeLine';
@@ -7,6 +8,17 @@ import './Profile.css';
 
 export default function Profile() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await axios.get(`/users?username=hayate`);
+      console.log({ response });
+      setUser(response.data);
+    };
+    fetchUser();
+  }, []);
 
   return (
     <>
@@ -20,13 +32,13 @@ export default function Profile() {
               <img src={PUBLIC_FOLDER + '/person/1.jpeg'} alt='' className='profileUserImg' />
             </div>
             <div className='profileInfo'>
-              <h4 className='profileInfoName'>Shin Code</h4>
-              <span className='profileInfoDesc'>Udemy講師 now</span>
+              <h4 className='profileInfoName'>{user.username}</h4>
+              <span className='profileInfoDesc'>{user.desc}</span>
             </div>
           </div>
           <div className='profileRightBottom'>
-            <TimeLine username="shincode" />
-            <Rightbar profile />
+            <TimeLine username='tanaka' />
+            <Rightbar user={user} />
           </div>
         </div>
       </div>
