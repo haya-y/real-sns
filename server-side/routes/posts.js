@@ -84,7 +84,7 @@ router.put('/:id/like', async (req, res) => {
 // get posts of timeline of profile page
 router.get('/profile/:username', async (req, res) => {
   try {
-    const user = await User.findOne(req.params.userName);
+    const user = await User.findOne({ username: req.params.username });
     const posts = await Post.find({ userId: user._id });
     return res.status(200).json(posts);
   } catch (err) {

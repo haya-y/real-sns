@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import React,{useEffect,useState} from 'react';
 import Post from '../post/Post';
 import Share from '../share/Share';
 import './TimeLine.css';
-import { Posts } from '../../dummyData';
-import axios from 'axios';
 
 export default function TimeLine({ username }) {
   const [posts, setPosts] = useState([]);
@@ -16,7 +15,7 @@ export default function TimeLine({ username }) {
       setPosts(response.data);
     };
     fetchPosts();
-  }, []);
+  }, [username]);
 
   return (
     <div className='timeline'>

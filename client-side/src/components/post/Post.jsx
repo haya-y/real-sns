@@ -1,24 +1,24 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import './Post.css';
 import { MoreVert } from '@mui/icons-material';
 import axios from 'axios';
-import { format, render, cancel, register } from 'timeago.js';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { format } from 'timeago.js';
+import './Post.css';
 
 export default function Post({ post }) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
-  const [users, setUsers] = useState({});
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await axios.get(`/users/${post.userId}`);
-      console.log({ response });
-      setUsers(response.data);
+      const response = await axios.get(`/users?userId=${post.userId}`);
+      setUser(response.data);
     };
     fetchUsers();
-  }, []);
+  }, [post.userId]);
 
   const handleLike = useCallback(() => {
     setLike(isLiked ? like - 1 : like + 1);
@@ -30,12 +30,14 @@ export default function Post({ post }) {
       <div className='postWrapper'>
         <div className='postTop'>
           <div className='postTopLeft'>
-            <img
-              src={users.profilePicture || PUBLIC_FOLDER + "/person/noAvatar.png"}
-              alt=''
-              className='postProfileImg'
-            />
-            <span className='postUserName'>{users.username}</span>
+            <Link to={`/profile/${user.username}`}>
+              <img
+                src={user.profilePicture || PUBLIC_FOLDER + '/person/noAvatar.png'}
+                alt=''
+                className='postProfileImg'
+              />
+            </Link>
+            <span className='postUserName'>{user.username}</span>
             <span className='postDate'>{format(post.createdAt)}</span>
           </div>
           <div className='postTopRight'>
