@@ -2,7 +2,7 @@ export const Users = [
   {
     id: 1,
     profilePicture: "/person/1.jpeg",
-    username: "ShinCode",
+    username: "Hayate",
   },
   {
     id: 2,
@@ -47,7 +47,7 @@ export const Posts = [
   },
   {
     id: 3,
-    desc: "ShinCodeさんの解説が分かりやすい。",
+    desc: "React修行中",
     photo: "/post/3.jpeg",
     date: "10分前",
     userId: 3,
