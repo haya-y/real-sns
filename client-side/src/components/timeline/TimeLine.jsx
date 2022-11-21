@@ -1,8 +1,8 @@
-import axios from 'axios';
-import React,{useEffect,useState} from 'react';
-import Post from '../post/Post';
-import Share from '../share/Share';
-import './TimeLine.css';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Post from "../post/Post";
+import Share from "../share/Share";
+import "./TimeLine.css";
 
 export default function TimeLine({ username }) {
   const [posts, setPosts] = useState([]);
@@ -11,7 +11,7 @@ export default function TimeLine({ username }) {
     const fetchPosts = async () => {
       const response = username
         ? await axios.get(`/posts/profile/${username}`)
-        : await axios.get('/posts/timeline/6304d19040d4092261cbeea3');
+        : await axios.get("/posts/timeline/6304d19040d4092261cbeea3");
       setPosts(response.data);
     };
     fetchPosts();
