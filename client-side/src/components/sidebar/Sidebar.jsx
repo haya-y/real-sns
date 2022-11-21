@@ -1,9 +1,9 @@
-import { Bookmark, Home, MessageRounded, Notifications, Person, Search, Settings } from '@mui/icons-material';
-import React from 'react';
-import './Sidebar.css';
-import { Users } from '../../dummyData';
-import CloseFriend from '../closeFriend/CloseFriend';
-import { Link } from 'react-router-dom';
+import { Bookmark, Home, MessageRounded, Notifications, Person, Search, Settings } from "@mui/icons-material";
+import React from "react";
+import "./Sidebar.css";
+import { Users } from "../../dummyData";
+import CloseFriend from "../closeFriend/CloseFriend";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
@@ -12,13 +12,15 @@ export default function Sidebar() {
         <ul className='sidebarList'>
           <li className='sidebarListItem'>
             <Home className='sidebarIcon' />
-            <Link to={'/'} style={{ textDecoration: 'none', color: 'black' }}>
+            <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>
               <span className='sidebarListItemText'>ホーム</span>
             </Link>
           </li>
           <li className='sidebarListItem'>
             <Search className='sidebarIcon' />
-            <span className='sidebarListItemText'>検索</span>
+            <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>
+              <span className='sidebarListItemText'>検索</span>
+            </Link>
           </li>
           <li className='sidebarListItem'>
             <Notifications className='sidebarIcon' />
@@ -34,7 +36,7 @@ export default function Sidebar() {
           </li>
           <li className='sidebarListItem'>
             <Person className='sidebarIcon' />
-            <Link to={'/profile/shincode'} style={{ textDecoration: 'none', color: 'black' }}>
+            <Link to={"/profile/hayate"} style={{ textDecoration: "none", color: "black" }}>
               <span className='sidebarListItemText'>プロフィール</span>
             </Link>
           </li>

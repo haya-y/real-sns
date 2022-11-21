@@ -3,7 +3,7 @@ import './Rightbar.css';
 import { Users } from '../../dummyData';
 import Online from '../online/Online';
 
-export default function Rightbar({ profile }) {
+export default function Rightbar({ user }) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const HomeRightbar = () => {
@@ -28,7 +28,7 @@ export default function Rightbar({ profile }) {
         <img src='assets/promotion/promotion2.jpeg' alt='' className='rightbarPromotionImg' />
         <p className='promotionName'>カーショップ</p>
         <img src='assets/promotion/promotion3.jpeg' alt='' className='rightbarPromotionImg' />
-        <p className='promotionName'>ShinCode株式会社</p>
+        <p className='promotionName'>Hayate株式会社</p>
       </>
     );
   };
@@ -46,7 +46,7 @@ export default function Rightbar({ profile }) {
           <div className='rightbarFollowings'>
             <div className='rightbarFollowing'>
               <img src={PUBLIC_FOLDER + '/person/1.jpeg'} alt='' className='rightbarFollowingImg' />
-              <span className='rightbarFollowingName'>Shin Code</span>
+              <span className='rightbarFollowingName'>Hayate</span>
             </div>
             <div className='rightbarFollowing'>
               <img src={PUBLIC_FOLDER + '/person/2.jpeg'} alt='' className='rightbarFollowingImg' />
@@ -72,7 +72,7 @@ export default function Rightbar({ profile }) {
 
   return (
     <div className='rightbar'>
-      <div className='rightbarWrapper'>{profile ? <ProfileRightbar /> : <HomeRightbar />}</div>
+      <div className='rightbarWrapper'>{user ? <ProfileRightbar /> : <HomeRightbar />}</div>
     </div>
   );
 }
