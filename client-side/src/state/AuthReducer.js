@@ -1,5 +1,5 @@
 const AuthReducer = (state, action) => {
-  switch (action) {
+  switch (action.type) {
     case 'LOGIN_START':
       return {
         user: null,
@@ -19,7 +19,7 @@ const AuthReducer = (state, action) => {
         error: action.payload,
       };
     default:
-    return state;
+      return state;
   }
 };
 
