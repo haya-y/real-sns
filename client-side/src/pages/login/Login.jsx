@@ -7,7 +7,6 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('チェック');
     console.log(email.current.value);
     console.log(password.current.value);
   };
