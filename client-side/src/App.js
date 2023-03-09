@@ -8,7 +8,6 @@ import { AuthContext } from "./state/AuthContext";
 
 function App() {
   const { user } = useContext(AuthContext);
-  console.log({user});
   return (
     <Router>
       <Routes>
