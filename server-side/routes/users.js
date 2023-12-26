@@ -33,12 +33,10 @@ router.delete('/:id', async (req, res) => {
 });
 
 // get user information by query parameter
-router.get('/', async (req, res) => {
-  const userId = req.query.userId;
-  const username = req.query.username;
+router.get('/:id', async (req, res) => {
+  const userId = req.params.id;
   try {
-    const user = userId ? await User.findById(userId) : await User.findOne({ username });
-
+    const user = await User.findById(userId);
     const { password, updatedAt, ...other } = user._doc;
     return res.status(200).json(other);
   } catch (err) {
