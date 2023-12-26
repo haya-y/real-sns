@@ -48,15 +48,15 @@ router.get('/:id', async (req, res) => {
 router.put('/:id/follow', async (req, res) => {
   if (req.body.userId !== req.params.id) {
     try {
-      const user = await User.findById(req.params.id);
-      const currentUser = await User.findById(req.body.userId);
-      if (!user.followers.includes(req.body.userId)) {
-        await user.updateOne({
+      const targetUser = await User.findById(req.params.id);
+      const sourceUser = await User.findById(req.body.userId);
+      if (!targetUser.followers.includes(req.body.userId)) {
+        await targetUser.updateOne({
           $push: {
             followers: req.body.userId,
           },
         });
-        await currentUser.updateOne({
+        await sourceUser.updateOne({
           $push: {
             followings: req.params.id,
           },
@@ -77,15 +77,15 @@ router.put('/:id/follow', async (req, res) => {
 router.put('/:id/unfollow', async (req, res) => {
   if (req.body.userId !== req.params.id) {
     try {
-      const user = await User.findById(req.params.id);
-      const currentUser = await User.findById(req.body.userId);
-      if (user.followers.includes(req.body.userId)) {
-        await user.updateOne({
+      const targetUser = await User.findById(req.params.id);
+      const sourceUser = await User.findById(req.body.userId);
+      if (targetUser.followers.includes(req.body.userId)) {
+        await targetUser.updateOne({
           $pull: {
             followers: req.body.userId,
           },
         });
-        await currentUser.updateOne({
+        await sourceUser.updateOne({
           $pull: {
             followings: req.params.id,
           },
