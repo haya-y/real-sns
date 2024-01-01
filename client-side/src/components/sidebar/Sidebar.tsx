@@ -1,57 +1,56 @@
-import { Bookmark, Home, MessageRounded, Notifications, Person, Search, Settings } from "@mui/icons-material";
-import React from "react";
-import "./Sidebar.css";
-import { Users } from "../../dummyData";
-import { Link } from "react-router-dom";
+import * as MUI from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import { Users } from '../../dummyData';
 import CloseFriend from '../closeFriend/CloseFriend';
+import { StyledSidebarDiv } from './Sidebar.styles';
 
 export default function Sidebar() {
   return (
-    <div className='sidebar'>
+    <StyledSidebarDiv>
       <div className='sidebarWrapper'>
-        <ul className='sidebarList'>
-          <li className='sidebarListItem'>
-            <Home className='sidebarIcon' />
-            <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>
-              <span className='sidebarListItemText'>ホーム</span>
+        <ul className='sidebarWrapper-list'>
+          <li className='sidebarWrapper-list-item'>
+            <MUI.Home className='sidebarWrapper-list-item-icon' />
+            <Link to={'/'} style={{ textDecoration: 'none', color: 'black' }}>
+              <span className='sidebarWrapper-list-item-icon-text'>ホーム</span>
             </Link>
           </li>
-          <li className='sidebarListItem'>
-            <Search className='sidebarIcon' />
-            <Link to={"/"} style={{ textDecoration: "none", color: "black" }}>
-              <span className='sidebarListItemText'>検索</span>
+          <li className='sidebarWrapper-list-item'>
+            <MUI.Search className='sidebarWrapper-list-item-icon' />
+            <Link to={'/'} style={{ textDecoration: 'none', color: 'black' }}>
+              <span className='sidebarWrapper-list-item-icon-text'>検索</span>
             </Link>
           </li>
-          <li className='sidebarListItem'>
-            <Notifications className='sidebarIcon' />
-            <span className='sidebarListItemText'>通知</span>
+          <li className='sidebarWrapper-list-item'>
+            <MUI.Notifications className='sidebarWrapper-list-item-icon' />
+            <span className='sidebarWrapper-list-item-icon-text'>通知</span>
           </li>
-          <li className='sidebarListItem'>
-            <MessageRounded className='sidebarIcon' />
-            <span className='sidebarListItemText'>メッセージ</span>
+          <li className='sidebarWrapper-list-item'>
+            <MUI.MessageRounded className='sidebarWrapper-list-item-icon' />
+            <span className='sidebarWrapper-list-item-icon-text'>メッセージ</span>
           </li>
-          <li className='sidebarListItem'>
-            <Bookmark className='sidebarIcon' />
-            <span className='sidebarListItemText'>ブックマーク</span>
+          <li className='sidebarWrapper-list-item'>
+            <MUI.Bookmark className='sidebarWrapper-list-item-icon' />
+            <span className='sidebarWrapper-list-item-icon-text'>ブックマーク</span>
           </li>
-          <li className='sidebarListItem'>
-            <Person className='sidebarIcon' />
-            <Link to={"/profile/hayate"} style={{ textDecoration: "none", color: "black" }}>
-              <span className='sidebarListItemText'>プロフィール</span>
-            </Link>
-          </li>
-          <li className='sidebarListItem'>
-            <Settings className='sidebarIcon' />
-            <span className='sidebarListItemText'>設定</span>
+          <Link to={'/profile/hayate'} style={{ textDecoration: 'none', color: 'black' }}>
+            <li className='sidebarWrapper-list-item'>
+              <MUI.Person className='sidebarWrapper-list-item-icon' />
+              <span className='sidebarWrapper-list-item-icon-text'>プロフィール</span>
+            </li>
+          </Link>
+          <li className='sidebarWrapper-list-item'>
+            <MUI.Settings className='sidebarWrapper-list-item-icon' />
+            <span className='sidebarWrapper-list-item-icon-text'>設定</span>
           </li>
         </ul>
-        <hr className='sidebarHr' />
-        <ul className='sidebarFriendList'>
+        <hr className='sidebarWrapper-line' />
+        <ul className='sidebarWrapper-friendList'>
           {Users.map((user) => (
             <CloseFriend user={user} key={user.id} />
           ))}
         </ul>
       </div>
-    </div>
+    </StyledSidebarDiv>
   );
 }
