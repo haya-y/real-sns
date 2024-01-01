@@ -6,12 +6,16 @@ import { Link } from 'react-router-dom';
 // import { format } from 'timeago.js';
 import './Post.css';
 
-export default function Post({ post }) {
+type Props = {
+  post: any;
+};
+
+export default function Post({ post }: Props) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<any>({});
 
   useEffect(() => {
     const fetchUsers = async () => {

@@ -3,7 +3,11 @@ import './Rightbar.css';
 import { Users } from '../../dummyData';
 import Online from '../online/Online';
 
-export default function Rightbar({ user }) {
+type Props = {
+  user?: any
+}
+
+export default function Rightbar({ user }: Props) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const HomeRightbar = () => {

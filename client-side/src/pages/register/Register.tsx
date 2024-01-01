@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import './Register.css';
 
 export default function Register() {
-  const username = useRef('');
-  const email = useRef('');
-  const password = useRef('');
-  const passwordConfirmation = useRef('');
+  const username = useRef<any>('');
+  const email = useRef<any>('');
+  const password = useRef<any>('');
+  const passwordConfirmation = useRef<any>('');
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (password.current.value !== passwordConfirmation.current.value) {
@@ -48,7 +48,7 @@ export default function Register() {
               className='registerInput'
               placeholder='パスワード'
               required
-              minLength='6'
+              minLength={6}
               ref={password}
             />
             <input
@@ -56,7 +56,7 @@ export default function Register() {
               className='registerInput'
               placeholder='確認用パスワード'
               required
-              minLength='6'
+              minLength={6}
               ref={passwordConfirmation}
             />
             <button className='registerButton' type='submit'>

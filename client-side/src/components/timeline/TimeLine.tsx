@@ -4,8 +4,12 @@ import Post from "../post/Post";
 import Share from "../share/Share";
 import "./TimeLine.css";
 
-export default function TimeLine({ username }) {
-  const [posts, setPosts] = useState([]);
+type Props = {
+  username?: any
+}
+
+export default function TimeLine({ username }: Props) {
+  const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {

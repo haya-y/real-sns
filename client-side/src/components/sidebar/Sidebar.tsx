@@ -2,8 +2,8 @@ import { Bookmark, Home, MessageRounded, Notifications, Person, Search, Settings
 import React from "react";
 import "./Sidebar.css";
 import { Users } from "../../dummyData";
-import CloseFriend from "../closeFriend/CloseFriend";
 import { Link } from "react-router-dom";
+import CloseFriend from '../closeFriend/CloseFriend';
 
 export default function Sidebar() {
   return (
