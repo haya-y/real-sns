@@ -1,6 +1,10 @@
 import React from 'react';
 
-export default function CloseFriend({ user }) {
+type Props = {
+  user: any
+}
+
+export default function CloseFriend({ user }: Props) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (

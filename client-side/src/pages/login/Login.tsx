@@ -4,11 +4,11 @@ import { AuthContext } from '../../state/AuthContext';
 import './Login.css';
 
 export default function Login() {
-  const email = useRef('');
-  const password = useRef('');
+  const email = useRef<any>('');
+  const password = useRef<any>('');
   const { dispatch } = useContext(AuthContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLDivElement>) => {
     e.preventDefault();
     loginCall(
       {

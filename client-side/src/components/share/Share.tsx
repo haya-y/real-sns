@@ -3,7 +3,11 @@ import './Share.css';
 import { Analytics, Face, Gif, Image } from '@mui/icons-material';
 import axios from 'axios';
 
-export default function Share({ username }) {
+type Props = {
+  username?: any
+}
+
+export default function Share({ username }: Props) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const [postText, setPostText] = useState('');
@@ -19,7 +23,7 @@ export default function Share({ username }) {
   }, [postText]);
 
   const onChangePostText = useCallback(
-    (e) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       setPostText(e.target.value);
       console.log(postText);
     },

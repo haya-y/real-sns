@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const loginCall = async (user, dispatch) => {
+export const loginCall = async (user: any, dispatch: any) => {
   dispatch({ type: 'LOGIN_START' });
   try {
     const response = await axios.post('auth/login', user);

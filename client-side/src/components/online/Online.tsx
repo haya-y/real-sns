@@ -1,6 +1,10 @@
 import React from 'react';
 
-export default function Online({ user }) {
+type Props = {
+  user: any
+}
+
+export default function Online({ user }: Props) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   
   return (
