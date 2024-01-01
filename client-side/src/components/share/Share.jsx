@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import './Share.css';
 import { Analytics, Face, Gif, Image } from '@mui/icons-material';
 import axios from 'axios';
