@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledShareDiv = styled.div`
   width: 100%;
   height: 170px;
-  box-shadow: 0px 0px 20px -12px #4b4eff;
+  box-shadow: 0px 0px 20px -10px #78bdf2;
   border-radius: 14px;
 
   .shareWrapper {
