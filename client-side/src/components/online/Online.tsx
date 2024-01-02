@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyledOnlineDiv } from './Online.styles';
 
 type Props = {
   user: any
@@ -8,14 +9,14 @@ export default function Online({ user }: Props) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   
   return (
-    <div>
+    <StyledOnlineDiv>
       <li className='rightbarFriend'>
-        <div className='rightbarProfileImgContainer'>
-          <img src={PUBLIC_FOLDER + user.profilePicture} alt='' className='rightbarProfileImg' />
-          <span className='rightbarOnline'></span>
+        <div className='rightbarFriend-profileContainer'>
+          <img src={PUBLIC_FOLDER + user.profilePicture} alt='' className='rightbarFriend-profileContainer-img' />
+          <span className='rightbarFriend-profileContainer-online'></span>
         </div>
-        <span className='rightbarUsername'>{user.username}</span>
+        <span className='rightbarFriend-username'>{user.username}</span>
       </li>
-    </div>
+    </StyledOnlineDiv>
   );
 }

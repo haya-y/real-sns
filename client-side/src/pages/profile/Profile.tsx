@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Rightbar from '../../components/rightbar/Rightbar';
 import Sidebar from '../../components/sidebar/Sidebar';
 import TimeLine from '../../components/timeline/TimeLine';
 import Topbar from '../../components/topbar/Topbar';
 import './Profile.css';
 import { useParams } from 'react-router-dom';
+import Rightbar from '../../components/rightbar/Rightbar';
 
 export default function Profile() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
