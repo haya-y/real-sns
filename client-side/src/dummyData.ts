@@ -4,7 +4,7 @@ import { User } from './type/User.types';
 export const Users: User[] = [
   {
     _id: '1',
-    username: 'Hayate',
+    username: 'John',
     email: '',
     password: '',
     profilePicture: '/person/1.jpeg',
