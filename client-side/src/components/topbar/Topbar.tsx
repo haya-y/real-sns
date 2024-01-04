@@ -2,7 +2,7 @@ import { Chat as MUIChat, Notifications as MUINotifications, Search as MUISearch
 import { Link } from 'react-router-dom';
 import { StyledTopbarDiv } from './Topbar.styles';
 
-export default function Topbar() {
+export const Topbar = () => {
   return (
     <StyledTopbarDiv>
       <div className='topbarLeft'>
@@ -31,4 +31,4 @@ export default function Topbar() {
       </div>
     </StyledTopbarDiv>
   );
-}
+};

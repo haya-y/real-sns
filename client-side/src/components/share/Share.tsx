@@ -7,7 +7,7 @@ type Props = {
   username?: any;
 };
 
-export default function Share({ username }: Props) {
+export const Share = ({ username }: Props) => {
   // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   const PUBLIC_FOLDER = './assets';
 
@@ -70,4 +70,4 @@ export default function Share({ username }: Props) {
       </div>
     </StyledShareDiv>
   );
-}
+};

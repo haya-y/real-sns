@@ -1,5 +1,5 @@
 import React, { ReactNode, useReducer } from 'react';
-import AuthReducer from './AuthReducer';
+import { AuthReducer } from './AuthReducer';
 
 type AuthContextState = {
   user: any;

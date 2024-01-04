@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
 
-export default function Register() {
+export const Register = () => {
   const username = useRef<any>('');
   const email = useRef<any>('');
   const password = useRef<any>('');
@@ -68,4 +68,4 @@ export default function Register() {
       </div>
     </div>
   );
-}
+};

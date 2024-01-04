@@ -13,7 +13,7 @@ type Props = {
   post: PostType;
 };
 
-export default function Post(props: Props) {
+export const Post = (props: Props) => {
   const {
     post: { likes, userId, desc, img, createdAt },
   } = props;

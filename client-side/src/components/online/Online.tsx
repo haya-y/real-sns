@@ -6,7 +6,7 @@ type Props = {
   user: User;
 };
 
-export default function Online({ user: { profilePicture, username } }: Props) {
+export const Online = ({ user: { profilePicture, username } }: Props) => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   return (
@@ -20,4 +20,4 @@ export default function Online({ user: { profilePicture, username } }: Props) {
       </li>
     </StyledOnlineDiv>
   );
-}
+};
