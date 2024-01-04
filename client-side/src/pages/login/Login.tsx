@@ -3,7 +3,7 @@ import { loginCall } from '../../actionCalls';
 import { AuthContext } from '../../state/AuthContext';
 import './Login.css';
 
-export default function Login() {
+export const Login = () => {
   const email = useRef<any>('');
   const password = useRef<any>('');
   const { dispatch } = useContext(AuthContext);
@@ -46,4 +46,4 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};

@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
-import Profile from "./pages/profile/Profile";
-import Register from "./pages/register/Register";
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Home } from './pages/home/Home';
+import { Login } from './pages/login/Login';
+import { Profile } from './pages/profile/Profile';
+import { Register } from './pages/register/Register';
 import { AuthContext } from './state/AuthContext';
 
-function App() {
+export const App = () => {
   const { user } = useContext(AuthContext);
   return (
     <Router>
@@ -18,6 +18,4 @@ function App() {
       </Routes>
     </Router>
   );
-}
-
-export default App;
+};

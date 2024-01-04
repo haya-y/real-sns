@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Post from '../post/Post';
-import Share from '../share/Share';
+import { Post } from '../post/Post';
+import { Share } from '../share/Share';
 import './TimeLine.styles';
 import { StyledTimeLineDiv } from './TimeLine.styles';
 import { Posts } from '../../dummyData';
@@ -10,7 +10,7 @@ type Props = {
   username?: any;
 };
 
-export default function TimeLine({ username }: Props) {
+export const TimeLine = ({ username }: Props) => {
   const [posts, setPosts] = useState<any[]>([]);
   console.log(posts);
 

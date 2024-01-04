@@ -1,10 +1,10 @@
 import * as MUI from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { Users } from '../../dummyData';
-import SidebarFriend from '../sidebarFriend/SidebarFriend';
+import { SidebarFriend } from '../sidebarFriend/SidebarFriend';
 import { StyledSidebarDiv } from './Sidebar.styles';
 
-export default function Sidebar() {
+export const Sidebar = () => {
   return (
     <StyledSidebarDiv>
       <div className='sidebarWrapper'>
@@ -53,4 +53,4 @@ export default function Sidebar() {
       </div>
     </StyledSidebarDiv>
   );
-}
+};
