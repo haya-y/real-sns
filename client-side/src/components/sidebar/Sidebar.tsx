@@ -1,7 +1,7 @@
 import * as MUI from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { Users } from '../../dummyData';
-import CloseFriend from '../closeFriend/CloseFriend';
+import SidebarFriend from '../sidebarFriend/SidebarFriend';
 import { StyledSidebarDiv } from './Sidebar.styles';
 
 export default function Sidebar() {
@@ -47,7 +47,7 @@ export default function Sidebar() {
         <hr className='sidebarWrapper-line' />
         <ul className='sidebarWrapper-friendList'>
           {Users.map((user) => (
-            <CloseFriend user={user} key={user.id} />
+            <SidebarFriend user={user} key={user._id} />
           ))}
         </ul>
       </div>

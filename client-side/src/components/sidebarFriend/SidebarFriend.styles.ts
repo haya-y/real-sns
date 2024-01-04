@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledCloseFriendLi = styled.li`
+export const StyledSidebarFriendLi = styled.li`
   display: flex;
   align-items: center;
   margin-bottom: 15px;
