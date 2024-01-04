@@ -87,7 +87,7 @@ export const Posts: Post[] = [
     img: '/post/1.jpeg',
     createdAt: new Date(),
     updatedAt: new Date(),
-    likes: [],
+    likes: ['1', '2', '3', '4', '5'],
     __v: 4,
   },
   {
@@ -97,7 +97,7 @@ export const Posts: Post[] = [
     img: '/post/2.jpeg',
     createdAt: new Date(),
     updatedAt: new Date(),
-    likes: [],
+    likes: ['1', '3', '5'],
     __v: 13,
   },
   {
@@ -107,7 +107,7 @@ export const Posts: Post[] = [
     img: '/post/3.jpeg',
     createdAt: new Date(),
     updatedAt: new Date(),
-    likes: [],
+    likes: ['2', '4'],
     __v: 29,
   },
   {
@@ -117,7 +117,7 @@ export const Posts: Post[] = [
     img: '/post/4.jpeg',
     createdAt: new Date(),
     updatedAt: new Date(),
-    likes: [],
+    likes: ['1', '5'],
     __v: 1,
   },
   {
@@ -127,7 +127,7 @@ export const Posts: Post[] = [
     img: '/post/5.jpeg',
     createdAt: new Date(),
     updatedAt: new Date(),
-    likes: [],
+    likes: ['3'],
     __v: 3,
   },
 ];

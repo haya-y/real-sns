@@ -6,6 +6,8 @@ import { Post as PostType } from '../../type/Post.types';
 import { StyledPostDiv } from './Post.styles';
 // TODO Warningが発生する
 // import { format } from 'timeago.js';
+import { User } from '../../type/User.types';
+import { Users } from '../../dummyData';
 
 type Props = {
   post: PostType;
@@ -20,8 +22,9 @@ export default function Post(props: Props) {
   const PUBLIC_FOLDER = './assets';
 
   const [like, setLike] = useState(likes.length);
-  const [isLiked, setIsLiked] = useState(false);
-  const [user, setUser] = useState<any>({});
+  const [pushLike, setPushLike] = useState(false);
+  const [user, setUser] = useState<User | undefined>(Users.find((user) => user._id === userId)); // ダミー用
+  // const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -32,23 +35,23 @@ export default function Post(props: Props) {
   }, [userId]);
 
   const handleLike = useCallback(() => {
-    setLike(isLiked ? like - 1 : like + 1);
-    setIsLiked(!isLiked);
-  }, [like, setLike, isLiked]);
+    setLike((prev) => (!pushLike ? prev + 1 : prev - 1));
+    setPushLike((prev) => !prev);
+  }, [pushLike]);
 
   return (
     <StyledPostDiv>
       <div className='postWrapper'>
         <div className='postWrapper-top'>
           <div className='postWrapper-top-left'>
-            <Link to={`/profile/${user.username}`}>
+            <Link to={`/profile/${user && user.username}`}>
               <img
-                src={user.profilePicture || PUBLIC_FOLDER + '/person/noAvatar.png'}
+                src={(user && PUBLIC_FOLDER + user.profilePicture) || PUBLIC_FOLDER + '/person/noAvatar.png'}
                 alt=''
                 className='postWrapper-top-left-profileImg'
               />
             </Link>
-            <span className='postWrapper-top-left-userName'>{user.username}</span>
+            <span className='postWrapper-top-left-userName'>{user && user.username}</span>
             {/* TODO FormatでWarningが発生する */}
             {/* <span className='postWrapper-top-left-date'>{format(post.createdAt)}</span> */}
             <span className='postWrapper-top-left-date'>{String(createdAt)}</span>
