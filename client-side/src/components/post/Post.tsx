@@ -1,69 +1,79 @@
-import { MoreVert } from '@mui/icons-material';
+import { MoreVert as MUIMoreVert } from '@mui/icons-material';
 import axios from 'axios';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Post as PostType } from '../../type/Post.types';
+import { StyledPostDiv } from './Post.styles';
 // TODO Warningが発生する
 // import { format } from 'timeago.js';
-import './Post.css';
+import { User } from '../../type/User.types';
+import { Users } from '../../dummyData';
 
 type Props = {
-  post: any;
+  post: PostType;
 };
 
-export default function Post({ post }: Props) {
-  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+export default function Post(props: Props) {
+  const {
+    post: { likes, userId, desc, img, createdAt },
+  } = props;
 
-  const [like, setLike] = useState(post.likes.length);
-  const [isLiked, setIsLiked] = useState(false);
-  const [user, setUser] = useState<any>({});
+  // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const PUBLIC_FOLDER = './assets';
+
+  const [like, setLike] = useState(likes.length);
+  const [pushLike, setPushLike] = useState(false);
+  const [user, setUser] = useState<User | undefined>(Users.find((user) => user._id === userId)); // ダミー用
+  // const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await axios.get(`/users?userId=${post.userId}`);
+      const response = await axios.get(`/users?userId=${userId}`);
       setUser(response.data);
     };
     fetchUsers();
-  }, [post.userId]);
+  }, [userId]);
 
   const handleLike = useCallback(() => {
-    setLike(isLiked ? like - 1 : like + 1);
-    setIsLiked(!isLiked);
-  }, [like, setLike, isLiked]);
+    setLike((prev) => (!pushLike ? prev + 1 : prev - 1));
+    setPushLike((prev) => !prev);
+  }, [pushLike]);
 
   return (
-    <div className='post'>
+    <StyledPostDiv>
       <div className='postWrapper'>
-        <div className='postTop'>
-          <div className='postTopLeft'>
-            <Link to={`/profile/${user.username}`}>
+        <div className='postWrapper-top'>
+          <div className='postWrapper-top-left'>
+            <Link to={`/profile/${user && user.username}`}>
               <img
-                src={user.profilePicture || PUBLIC_FOLDER + '/person/noAvatar.png'}
+                src={(user && PUBLIC_FOLDER + user.profilePicture) || PUBLIC_FOLDER + '/person/noAvatar.png'}
                 alt=''
-                className='postProfileImg'
+                className='postWrapper-top-left-profileImg'
               />
             </Link>
-            <span className='postUserName'>{user.username}</span>
-            {/* TODO Warningが発生する */}
-            {/* <span className='postDate'>{format(post.createdAt)}</span> */}
+            <span className='postWrapper-top-left-userName'>{user && user.username}</span>
+            {/* TODO FormatでWarningが発生する */}
+            {/* <span className='postWrapper-top-left-date'>{format(post.createdAt)}</span> */}
+            <span className='postWrapper-top-left-date'>{String(createdAt)}</span>
           </div>
-          <div className='postTopRight'>
-            <MoreVert />
+          <div className='postWrapper-top-right'>
+            <MUIMoreVert />
           </div>
         </div>
-        <div className='postCenter'>
-          <span className='postText'>{post.desc}</span>
-          <img src={PUBLIC_FOLDER + post.img} alt='' className='postImg' />
+        <div className='postWrapper-center'>
+          <span className='postWrapper-center-text'>{desc}</span>
+          <img src={PUBLIC_FOLDER + img} alt='' className='postWrapper-center-img' />
         </div>
-        <div className='postBottom' onClick={() => handleLike()}>
-          <div className='postBottomLeft'>
-            <img src={PUBLIC_FOLDER + '/heart.png'} alt='likeIcon' />
-            <span className='postLikeCounter'>{like}人がいいねを押しました。</span>
+        <div className='postWrapper-bottom' onClick={() => handleLike()}>
+          <div className='postWrapper-bottom-left'>
+            <img className='postWrapper-bottom-left-img' src={PUBLIC_FOLDER + '/heart.png'} alt='likeIcon' />
+            <span className='postWrapper-bottom-left-likeCounter'>{like}人がいいねを押しました。</span>
           </div>
-          <div className='postBottomRight'>
-            <span className='postCommentText'>{post.comment}: コメント</span>
+          <div className='postWrapper-bottom-right'>
+            <span className='postWrapper-bottom-right-comment'>{10}: コメント</span>
           </div>
         </div>
       </div>
-    </div>
+    </StyledPostDiv>
   );
 }

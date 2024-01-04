@@ -1,14 +1,15 @@
-import React, { useCallback, useState } from 'react';
-import './Share.css';
-import { Analytics, Face, Gif, Image } from '@mui/icons-material';
+import * as MUI from '@mui/icons-material';
 import axios from 'axios';
+import React, { useCallback, useState } from 'react';
+import { StyledShareDiv } from './Share.styles';
 
 type Props = {
-  username?: any
-}
+  username?: any;
+};
 
 export default function Share({ username }: Props) {
-  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const PUBLIC_FOLDER = './assets';
 
   const [postText, setPostText] = useState('');
 
@@ -31,42 +32,42 @@ export default function Share({ username }: Props) {
   );
 
   return (
-    <div className='share'>
+    <StyledShareDiv>
       <div className='shareWrapper'>
-        <div className='shareTop'>
-          <img src={PUBLIC_FOLDER + '/person/noAvatar.png'} alt='' className='shareProfileImg' />
+        <div className='shareWrapper-top'>
+          <img src={PUBLIC_FOLDER + '/person/noAvatar.png'} alt='' className='shareWrapper-top-profileImg' />
           <input
             type='text'
-            name=''
-            id=''
-            className='shareInput'
+            className='shareWrapper-top-input'
             placeholder='今何してるの？'
             onChange={(e) => onChangePostText(e)}
           />
         </div>
-        <hr className='shareHr' />
-        <div className='shareButtons'>
-          <div className='shareOption'>
-            <Image className='shareIcon' htmlColor='blue' />
-            <span className='shareOptionText'>写真</span>
+        <hr className='shareWrapper-hr' />
+        <div className='shareWrapper-buttons'>
+          <div className='shareWrapper-buttons-options'>
+            <div className='shareWrapper-buttons-options-option'>
+              <MUI.Image className='shareWrapper-buttons-options-option-icon' htmlColor='blue' />
+              <span className='shareWrapper-buttons-options-option-text'>写真</span>
+            </div>
+            <div className='shareWrapper-buttons-options-option'>
+              <MUI.Gif className='shareWrapper-buttons-options-option-icon' htmlColor='hotpink' />
+              <span className='shareWrapper-buttons-options-option-text'>GIF</span>
+            </div>
+            <div className='shareWrapper-buttons-options-option'>
+              <MUI.Face className='shareWrapper-buttons-options-option-icon' htmlColor='green' />
+              <span className='shareWrapper-buttons-options-option-text'>気持ち</span>
+            </div>
+            <div className='shareWrapper-buttons-options-option'>
+              <MUI.Analytics className='shareWrapper-buttons-options-option-icon' htmlColor='red' />
+              <span className='shareWrapper-buttons-options-option-text'>投票</span>
+            </div>
           </div>
-          <div className='shareOption'>
-            <Gif className='shareIcon' htmlColor='hotpink' />
-            <span className='shareOptionText'>GIF</span>
-          </div>
-          <div className='shareOption'>
-            <Face className='shareIcon' htmlColor='green' />
-            <span className='shareOptionText'>気持ち</span>
-          </div>
-          <div className='shareOption'>
-            <Analytics className='shareIcon' htmlColor='red' />
-            <span className='shareOptionText'>投票</span>
-          </div>
-          <button className='shareButton' onClick={onClickPostBtn}>
+          <button className='shareWrapper-buttons-postBtn' onClick={onClickPostBtn}>
             投稿
           </button>
         </div>
       </div>
-    </div>
+    </StyledShareDiv>
   );
 }
