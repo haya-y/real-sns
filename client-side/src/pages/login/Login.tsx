@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import { loginCall } from '../../actionCalls';
-import { AuthContext } from '../../state/AuthContext';
+import { AuthContext } from '../../redux/AuthContext';
 import { StyledLoginDiv } from './Login.styles';
 
 export const Login = () => {

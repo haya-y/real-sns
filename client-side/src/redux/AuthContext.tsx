@@ -1,5 +1,5 @@
-import React, { ReactNode, useReducer } from 'react';
-import { AuthReducer } from './AuthReducer';
+import { createContext, ReactNode, useReducer } from 'react';
+import { AuthReducer } from './reducers/AuthReducer';
 
 type AuthContextState = {
   user: any;
@@ -15,7 +15,7 @@ const initialState: AuthContextState = {
   dispatch: () => {},
 };
 
-export const AuthContext = React.createContext<AuthContextState>(initialState);
+export const AuthContext = createContext<AuthContextState>(initialState);
 
 type Props = {
   children: ReactNode;
