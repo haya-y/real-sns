@@ -11,10 +11,10 @@ import { StyledProfileDiv } from './Profile.styles';
 
 export const Profile = () => {
   // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  const PUBLIC_FOLDER = '/assets'; // TODO 「/assetsでパス指定しないと画像が表示されない」
+  const PUBLIC_FOLDER = '/assets'; // TODO 「'assets'ではなく、'/assets'でパス指定しないと画像が表示されない」
 
-  const [user, setUser] = useState<User | null>(null);
-  // const [user, setUser] = useState<User | null>(Users[0]); // ダミー用
+  // const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(Users[0]); // ダミー用
   const username = useParams().username;
 
   // useEffect(() => {
@@ -26,7 +26,7 @@ export const Profile = () => {
   //   fetchUser();
   // }, [username]);
 
-  console.log('user.coverPicture: ', user?.coverPicture);
+  console.log({ username });
 
   return (
     <StyledProfileDiv>
@@ -54,7 +54,7 @@ export const Profile = () => {
           </div>
           <div className='profile-right-bottom'>
             <TimeLine username={username} />
-            <Rightbar user={user} />
+            <Rightbar user={user} profile />
           </div>
         </div>
       </div>
