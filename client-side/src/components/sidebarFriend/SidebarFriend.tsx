@@ -8,7 +8,7 @@ type Props = {
 
 export const SidebarFriend = ({ user: { profilePicture, username } }: Props) => {
   // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  const PUBLIC_FOLDER = './assets';
+  const PUBLIC_FOLDER = '/assets';
 
   return (
     <StyledSidebarFriendLi>

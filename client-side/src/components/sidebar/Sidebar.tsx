@@ -33,6 +33,7 @@ export const Sidebar = () => {
             <MUI.Bookmark className='sidebarWrapper-list-item-icon' />
             <span className='sidebarWrapper-list-item-icon-text'>ブックマーク</span>
           </li>
+          {/* TODO ⇩のリンクはダミー */}
           <Link to={'/profile/hayate'} style={{ textDecoration: 'none', color: 'black' }}>
             <li className='sidebarWrapper-list-item'>
               <MUI.Person className='sidebarWrapper-list-item-icon' />

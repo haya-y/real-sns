@@ -4,12 +4,13 @@ import { StyledHomeRightbarDiv } from './HomeRightbar.styles';
 
 export const HomeRightbar = () => {
   // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const PUBLIC_FOLDER = '/assets';
 
   return (
     <StyledHomeRightbarDiv>
       <div className='homeRightbarWrapper'>
         <div className='homeRightbarWrapper-eventContainer'>
-          <img src='assets/star.png' alt='' className='homeRightbarWrapper-eventContainer-starImg' />
+          <img src={PUBLIC_FOLDER + '/star.png'} alt='' className='homeRightbarWrapper-eventContainer-starImg' />
           <span className='homeRightbarWrapper-eventContainer-eventText'>
             <b>フォロワー限定</b>イベント開催中！
           </span>
@@ -22,11 +23,23 @@ export const HomeRightbar = () => {
           ))}
         </ul>
         <p className='homeRightbarWrapper-promotionTitle'>プロモーション広告</p>
-        <img src='assets/promotion/promotion1.jpeg' alt='' className='homeRightbarWrapper-rightbarPromotionImg' />
+        <img
+          src={PUBLIC_FOLDER + '/promotion/promotion1.jpeg'}
+          alt=''
+          className='homeRightbarWrapper-rightbarPromotionImg'
+        />
         <p className='homeRightbarWrapper-promotionName'>ショッピング</p>
-        <img src='assets/promotion/promotion2.jpeg' alt='' className='homeRightbarWrapper-rightbarPromotionImg' />
+        <img
+          src={PUBLIC_FOLDER + '/promotion/promotion2.jpeg'}
+          alt=''
+          className='homeRightbarWrapper-rightbarPromotionImg'
+        />
         <p className='homeRightbarWrapper-promotionName'>カーショップ</p>
-        <img src='assets/promotion/promotion3.jpeg' alt='' className='homeRightbarWrapper-rightbarPromotionImg' />
+        <img
+          src={PUBLIC_FOLDER + '/promotion/promotion3.jpeg'}
+          alt=''
+          className='homeRightbarWrapper-rightbarPromotionImg'
+        />
         <p className='homeRightbarWrapper-promotionName'>ABCD株式会社</p>
       </div>
     </StyledHomeRightbarDiv>

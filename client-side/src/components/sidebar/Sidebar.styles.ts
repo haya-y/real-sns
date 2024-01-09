@@ -24,6 +24,9 @@ export const StyledSidebarDiv = styled.div`
         &:hover {
           box-shadow: none;
           font-weight: bold;
+          .sidebarWrapper-list-item-icon {
+            transform: scale(1.1);
+          }
         }
 
         &:active {
