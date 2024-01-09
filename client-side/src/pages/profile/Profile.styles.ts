@@ -20,6 +20,7 @@ export const StyledProfileDiv = styled.div`
 
           &-userImg {
             position: absolute;
+            object-fit: cover;
             right: 0;
             left: 0;
             width: 150px;

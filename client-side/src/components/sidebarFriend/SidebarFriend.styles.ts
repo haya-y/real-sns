@@ -10,6 +10,9 @@ export const StyledSidebarFriendLi = styled.li`
   &:hover {
     font-weight: bold;
     box-shadow: 0px 0px 20px -10px #78bdf2;
+    .sidebarFriendImg {
+      transform: scale(1.1);
+    }
   }
 
   &:active {

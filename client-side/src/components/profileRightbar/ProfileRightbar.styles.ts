@@ -18,7 +18,7 @@ export const StyledProfileRightbarDiv = styled.div`
       }
     }
 
-    &-friendTitle {
+    &-title {
       font-size: 18px;
       font-weight: 550;
       margin-bottom: 10px;
@@ -42,7 +42,18 @@ export const StyledProfileRightbarDiv = styled.div`
           object-fit: cover;
         }
 
-        &-name {}
+        &-name {
+          margin: auto;
+        }
+
+        &:hover {
+          font-weight: bold;
+          transform: scale(1.05);
+        }
+
+        &:active {
+          transform: scale(1);
+        }
       }
     }
   }
