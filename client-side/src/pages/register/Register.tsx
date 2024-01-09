@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Register.css';
+import { StyledRegisterDiv } from './Register.styles';
 
 export const Register = () => {
   const username = useRef<any>('');
@@ -32,20 +32,20 @@ export const Register = () => {
   };
 
   return (
-    <div className='register'>
+    <StyledRegisterDiv>
       <div className='registerWrapper'>
-        <div className='registerLeft'>
-          <h3 className='registerLogo'>Real SNS</h3>
-          <span className='registerDesc'>本格的なSNSを、自分の手で</span>
+        <div className='registerWrapper-left'>
+          <h3 className='registerWrapper-left-logo'>Real SNS</h3>
+          <span className='registerWrapper-left-desc'>本格的なSNSを、自分の手で</span>
         </div>
-        <div className='registerRight'>
-          <form className='registerBox' onSubmit={(e) => handleSubmit(e)}>
-            <p className='registerMsg'>新規登録はこちら</p>
-            <input type='text' className='registerInput' placeholder='ユーザー名' required ref={username} />
-            <input type='email' className='registerInput' placeholder='Eメール' required ref={email} />
+        <div className='registerWrapper-right'>
+          <form className='registerWrapper-right-box' onSubmit={(e) => handleSubmit(e)}>
+            <p className='registerWrapper-right-box-msg'>新規登録はこちら</p>
+            <input type='text' className='registerWrapper-right-box-registerInput' placeholder='ユーザー名' required ref={username} />
+            <input type='email' className='registerWrapper-right-box-registerInput' placeholder='Eメール' required ref={email} />
             <input
               type='password'
-              className='registerInput'
+              className='registerWrapper-right-box-registerInput'
               placeholder='パスワード'
               required
               minLength={6}
@@ -53,19 +53,19 @@ export const Register = () => {
             />
             <input
               type='password'
-              className='registerInput'
+              className='registerWrapper-right-box-registerInput'
               placeholder='確認用パスワード'
               required
               minLength={6}
               ref={passwordConfirmation}
             />
-            <button className='registerButton' type='submit'>
+            <button className='registerWrapper-right-box-signUpButton' type='submit'>
               サインアップ
             </button>
-            <button className='registerRegisterButton'>ログイン</button>
+            <button className='registerWrapper-right-box-loginButton'>ログイン</button>
           </form>
         </div>
       </div>
-    </div>
+    </StyledRegisterDiv>
   );
 };

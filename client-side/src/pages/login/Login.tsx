@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from 'react';
 import { loginCall } from '../../actionCalls';
 import { AuthContext } from '../../state/AuthContext';
-import './Login.css';
+import { StyledLoginDiv } from './Login.styles';
 
 export const Login = () => {
   const email = useRef<any>('');
@@ -20,30 +20,30 @@ export const Login = () => {
   };
 
   return (
-    <div className='login'>
+    <StyledLoginDiv>
       <div className='loginWrapper'>
-        <div className='loginLeft'>
-          <h3 className='loginLogo'>Real SNS</h3>
-          <span className='loginDesc'>本格的なSNSを、自分の手で</span>
+        <div className='loginWrapper-left'>
+          <h3 className='loginWrapper-left-logo'>Real SNS</h3>
+          <span className='loginWrapper-left-desc'>本格的なSNSを、自分の手で</span>
         </div>
-        <div className='loginRight' onSubmit={(e) => handleSubmit(e)}>
-          <form className='loginBox'>
-            <p className='loginMsg'>ログインはこちら</p>
-            <input type='email' className='loginInput' placeholder='Eメール' required ref={email} />
+        <div className='loginWrapper-right' onSubmit={(e) => handleSubmit(e)}>
+          <form className='loginWrapper-right-box'>
+            <p className='loginWrapper-right-box-msg'>ログインはこちら</p>
+            <input type='email' className='loginWrapper-right-box-loginInput' placeholder='Eメール' required ref={email} />
             <input
               type='password'
-              className='loginInput'
+              className='loginWrapper-right-box-loginInput'
               placeholder='パスワード'
               required
               minLength={6}
               ref={password}
             />
-            <button className='loginButton'>ログイン</button>
-            <span className='loginForgot'>パスワードを忘れた方へ</span>
-            <button className='loginRegisterButton'>アカウント作成</button>
+            <button className='loginWrapper-right-box-loginButton'>ログイン</button>
+            <span className='loginWrapper-right-box-loginForgot'>パスワードを忘れた方へ</span>
+            <button className='loginWrapper-right-box-registerButton'>アカウント作成</button>
           </form>
         </div>
       </div>
-    </div>
+    </StyledLoginDiv>
   );
 };
