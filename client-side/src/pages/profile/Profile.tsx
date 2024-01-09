@@ -1,12 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Rightbar } from '../../components/rightbar/Rightbar';
 import { Sidebar } from '../../components/sidebar/Sidebar';
 import { TimeLine } from '../../components/timeline/TimeLine';
 import { Topbar } from '../../components/topbar/Topbar';
-import { useParams } from 'react-router-dom';
-import { Rightbar } from '../../components/rightbar/Rightbar';
-import { User } from '../../type/User.types';
 import { Users } from '../../dummyData';
+import { User } from '../../type/User.types';
 import { StyledProfileDiv } from './Profile.styles';
 
 export const Profile = () => {
@@ -17,14 +17,14 @@ export const Profile = () => {
   const [user, setUser] = useState<User | null>(Users[0]); // ダミー用
   const username = useParams().username;
 
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     const response = await axios.get(`/users?username=${username}`);
-  //     console.log({ response });
-  //     setUser(response.data);
-  //   };
-  //   fetchUser();
-  // }, [username]);
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await axios.get(`/users?username=${username}`);
+      console.log({ response });
+      setUser(response.data);
+    };
+    fetchUser();
+  }, [username]);
 
   console.log({ username });
 
@@ -38,12 +38,12 @@ export const Profile = () => {
             <div className='profile-right-top-cover'>
               <img
                 src={user !== null ? PUBLIC_FOLDER + user.coverPicture : PUBLIC_FOLDER + '/post/3.jpeg'}
-                alt='background image'
+                alt='background'
                 className='profile-right-top-cover-coverImg'
               />
               <img
                 src={user !== null ? PUBLIC_FOLDER + user.profilePicture : PUBLIC_FOLDER + '/person/noAvatar.png'}
-                alt='profile image'
+                alt='profile'
                 className='profile-right-top-cover-userImg'
               />
             </div>
