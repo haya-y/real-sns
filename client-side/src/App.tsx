@@ -4,7 +4,7 @@ import { Home } from './pages/home/Home';
 import { Login } from './pages/login/Login';
 import { Profile } from './pages/profile/Profile';
 import { Register } from './pages/register/Register';
-import { AuthContext } from './state/AuthContext';
+import { AuthContext } from './redux/AuthContext';
 
 export const App = () => {
   const { user } = useContext(AuthContext);
