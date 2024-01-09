@@ -1,4 +1,4 @@
-import { Chat as MUIChat, Notifications as MUINotifications, Search as MUISearch } from '@mui/icons-material';
+import * as MUI from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { StyledTopbarDiv } from './Topbar.styles';
 
@@ -12,18 +12,18 @@ export const Topbar = () => {
       </div>
       <div className='topbarCenter'>
         <div className='topbarCenter-searchbar'>
-          <MUISearch className='topbarCenter-searchbar-searchIcon'></MUISearch>
+          <MUI.Search className='topbarCenter-searchbar-searchIcon'></MUI.Search>
           <input type='text' className='topbarCenter-searchbar-searchInput' placeholder='探し物は何ですか？' />
         </div>
       </div>
       <div className='topbarRight'>
         <div className='topbarRight-icons'>
           <div className='topbarRight-icons-items'>
-            <MUIChat />
+            <MUI.Chat />
             <span className='topbarRight-icons-items-badge'>10</span>
           </div>
           <div className='topbarRight-icons-items'>
-            <MUINotifications />
+            <MUI.Notifications />
             <span className='topbarRight-icons-items-badge'>20</span>
           </div>
           <img src='/assets/person/1.jpeg' alt='' />

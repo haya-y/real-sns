@@ -7,7 +7,8 @@ type Props = {
 };
 
 export const Online = ({ user: { profilePicture, username } }: Props) => {
-  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const PUBLIC_FOLDER = '/assets';
 
   return (
     <StyledOnlineDiv>

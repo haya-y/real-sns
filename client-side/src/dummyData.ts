@@ -8,7 +8,7 @@ export const Users: User[] = [
     email: '',
     password: '',
     profilePicture: '/person/1.jpeg',
-    coverPicture: '',
+    coverPicture: '/post/5.jpeg',
     followers: [],
     followings: [],
     isAdmin: false,

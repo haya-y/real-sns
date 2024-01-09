@@ -12,7 +12,7 @@ type Props = {
 
 export const TimeLine = ({ username }: Props) => {
   const [posts, setPosts] = useState<any[]>([]);
-  console.log(posts);
+  console.log({ posts });
 
   useEffect(() => {
     const fetchUserPosts = async () => {
@@ -38,4 +38,4 @@ export const TimeLine = ({ username }: Props) => {
       </div>
     </StyledTimeLineDiv>
   );
-}
+};

@@ -11,20 +11,22 @@ import { StyledProfileDiv } from './Profile.styles';
 
 export const Profile = () => {
   // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  const PUBLIC_FOLDER = './assets';
+  const PUBLIC_FOLDER = '/assets'; // TODO 「/assetsでパス指定しないと画像が表示されない」
 
-  const [user, setUser] = useState<User>(Users[0]);
+  const [user, setUser] = useState<User | null>(null);
+  // const [user, setUser] = useState<User | null>(Users[0]); // ダミー用
   const username = useParams().username;
-  console.log({ username });
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const response = await axios.get(`/users?username=${username}`);
-      console.log({ response });
-      setUser(response.data);
-    };
-    fetchUser();
-  }, [username]);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     const response = await axios.get(`/users?username=${username}`);
+  //     console.log({ response });
+  //     setUser(response.data);
+  //   };
+  //   fetchUser();
+  // }, [username]);
+
+  console.log('user.coverPicture: ', user?.coverPicture);
 
   return (
     <StyledProfileDiv>
@@ -34,16 +36,20 @@ export const Profile = () => {
         <div className='profile-right'>
           <div className='profile-right-top'>
             <div className='profile-right-top-cover'>
-              <img src={user.coverPicture || PUBLIC_FOLDER + '/post/3.jpeg'} alt='' className='profile-right-top-cover-coverImg' />
               <img
-                src={user.profilePicture || PUBLIC_FOLDER + '/person/noAvatar.png'}
-                alt=''
+                src={user !== null ? PUBLIC_FOLDER + user.coverPicture : PUBLIC_FOLDER + '/post/3.jpeg'}
+                alt='background image'
+                className='profile-right-top-cover-coverImg'
+              />
+              <img
+                src={user !== null ? PUBLIC_FOLDER + user.profilePicture : PUBLIC_FOLDER + '/person/noAvatar.png'}
+                alt='profile image'
                 className='profile-right-top-cover-userImg'
               />
             </div>
             <div className='profile-right-top-info'>
-              <h4 className='profile-right-top-info-name'>{user.username}</h4>
-              <span className='profile-right-top-info-desc'>{user.desc}</span>
+              <h4 className='profile-right-top-info-name'>{user !== null && user.username}</h4>
+              <span className='profile-right-top-info-desc'>{user !== null && user.desc}</span>
             </div>
           </div>
           <div className='profile-right-bottom'>

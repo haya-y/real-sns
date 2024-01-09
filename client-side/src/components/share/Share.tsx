@@ -9,7 +9,7 @@ type Props = {
 
 export const Share = ({ username }: Props) => {
   // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  const PUBLIC_FOLDER = './assets';
+  const PUBLIC_FOLDER = '/assets';
 
   const [postText, setPostText] = useState('');
 

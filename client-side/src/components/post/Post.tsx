@@ -19,7 +19,7 @@ export const Post = (props: Props) => {
   } = props;
 
   // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  const PUBLIC_FOLDER = './assets';
+  const PUBLIC_FOLDER = '/assets';
 
   const [like, setLike] = useState(likes.length);
   const [pushLike, setPushLike] = useState(false);
