@@ -5,20 +5,20 @@ import { Rightbar } from '../../components/rightbar/Rightbar';
 import { Sidebar } from '../../components/sidebar/Sidebar';
 import { TimeLine } from '../../components/timeline/TimeLine';
 import { Topbar } from '../../components/topbar/Topbar';
-import { PUBLIC_FOLDER } from '../../constants';
-import { Users } from '../../dummyData';
+// import { Users } from '../../dummyData';
 import { User } from '../../types/User.types';
 import { StyledProfileDiv } from './Profile.styles';
 
 export const Profile = () => {
-  // const [user, setUser] = useState<User | null>(null);
-  const [user, setUser] = useState<User | null>(Users[0]); // ダミー用
+  const [user, setUser] = useState<User>();
+  // const [user, setUser] = useState<User | null>(Users[0]); // ダミー用
   const username = useParams().username;
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await axios.get(`/users?username=${username}`);
-      console.log({ response });
+      const response = await axios.get(`/users/?username=${username}`);
+      // console.log('ProfileのURLのusernameから取得したユーザー情報:');
+      // console.log(response.data);
       setUser(response.data);
     };
     fetchUser();
@@ -32,25 +32,17 @@ export const Profile = () => {
         <div className='profile-right'>
           <div className='profile-right-top'>
             <div className='profile-right-top-cover'>
-              <img
-                src={user !== null ? PUBLIC_FOLDER + user.coverPicture : PUBLIC_FOLDER + '/post/3.jpeg'}
-                alt='background'
-                className='profile-right-top-cover-coverImg'
-              />
-              <img
-                src={user !== null ? PUBLIC_FOLDER + user.profilePicture : PUBLIC_FOLDER + '/person/noAvatar.png'}
-                alt='profile'
-                className='profile-right-top-cover-userImg'
-              />
+              <img src={user ? user.coverPicture : ''} alt='background' className='profile-right-top-cover-coverImg' />
+              <img src={user ? user.profilePicture : ''} alt='profile' className='profile-right-top-cover-userImg' />
             </div>
             <div className='profile-right-top-info'>
-              <h4 className='profile-right-top-info-name'>{user !== null && user.username}</h4>
-              <span className='profile-right-top-info-desc'>{user !== null && user.desc}</span>
+              <h4 className='profile-right-top-info-name'>{user && user.username}</h4>
+              <span className='profile-right-top-info-desc'>{user && user.desc}</span>
             </div>
           </div>
           <div className='profile-right-bottom'>
             <TimeLine username={username} />
-            <Rightbar user={user} profile />
+            <Rightbar user={user} />
           </div>
         </div>
       </div>

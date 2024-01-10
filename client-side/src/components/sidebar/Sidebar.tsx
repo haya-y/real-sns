@@ -34,7 +34,7 @@ export const Sidebar = () => {
             <span className='sidebarWrapper-list-item-icon-text'>ブックマーク</span>
           </li>
           {/* TODO ⇩のリンクはダミー */}
-          <Link className='sidebarWrapper-list-item-icon-link' to={'/profile/testPerson'} style={{}}>
+          <Link className='sidebarWrapper-list-item-icon-link' to={'/profile/hayate'} style={{}}>
             <li className='sidebarWrapper-list-item'>
               <MUI.Person className='sidebarWrapper-list-item-icon' />
               <span className='sidebarWrapper-list-item-icon-text'>プロフィール</span>

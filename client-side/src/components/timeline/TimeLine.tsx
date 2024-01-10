@@ -4,28 +4,28 @@ import { Post } from '../post/Post';
 import { Share } from '../share/Share';
 import './TimeLine.styles';
 import { StyledTimeLineDiv } from './TimeLine.styles';
-// import { Posts } from '../../dummyData';
 import { Post as PostType } from '../../types/Post.types';
+// import { Posts } from '../../dummyData';
 
 type Props = {
   userId?: string;
+  username?: string;
 };
 
-// userIdの初期値はダミー
-export const TimeLine = ({ userId = '636b92b170ad98f78123f74b' }: Props) => {
+// TODO userIdの初期値はダミー
+export const TimeLine = ({ userId = '6304d19040d4092261cbeea3', username }: Props) => {
   const [posts, setPosts] = useState<PostType[]>([]);
-  console.log({ posts });
 
   useEffect(() => {
     const fetchUserPosts = async () => {
-      // const response = userId
-      //   ? await axios.get(`/posts/profile/${userId}`)
-      //   : await axios.get(`/posts/timeline/${userId}`);
-      const response = await axios.get(`/posts/timeline/${userId}`);
+      const response = username
+        ? await axios.get(`/posts/profile/${username}`)
+        : await axios.get(`/posts/timeline/${userId}`);
       setPosts(response.data);
     };
     fetchUserPosts();
-  }, [userId]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <StyledTimeLineDiv>

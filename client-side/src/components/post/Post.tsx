@@ -21,7 +21,7 @@ export const Post = ({ post: { likes, userId, desc, img, createdAt } }: Props) =
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await axios.get(`/users/${userId}`);
+      const response = await axios.get(`/users/?userId=${userId}`);
       setUser(response.data);
     };
     fetchUsers();
