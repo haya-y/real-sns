@@ -25,7 +25,8 @@ export const Post = ({ post: { likes, userId, desc, img, createdAt } }: Props) =
       setUser(response.data);
     };
     fetchUsers();
-  }, [userId]);
+    // eslint-disable-next-line
+  }, []);
 
   const handleLike = useCallback(() => {
     setLike((prev) => (!pushLike ? prev + 1 : prev - 1));

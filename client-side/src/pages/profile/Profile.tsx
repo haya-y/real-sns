@@ -8,6 +8,7 @@ import { Topbar } from '../../components/topbar/Topbar';
 // import { Users } from '../../dummyData';
 import { User } from '../../types/User.types';
 import { StyledProfileDiv } from './Profile.styles';
+import { PUBLIC_FOLDER } from '../../constants';
 
 export const Profile = () => {
   const [user, setUser] = useState<User>();
@@ -17,12 +18,11 @@ export const Profile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const response = await axios.get(`/users/?username=${username}`);
-      // console.log('ProfileのURLのusernameから取得したユーザー情報:');
-      // console.log(response.data);
       setUser(response.data);
     };
     fetchUser();
-  }, [username]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <StyledProfileDiv>
@@ -32,8 +32,16 @@ export const Profile = () => {
         <div className='profile-right'>
           <div className='profile-right-top'>
             <div className='profile-right-top-cover'>
-              <img src={user ? user.coverPicture : ''} alt='background' className='profile-right-top-cover-coverImg' />
-              <img src={user ? user.profilePicture : ''} alt='profile' className='profile-right-top-cover-userImg' />
+              <img
+                src={user ? user.coverPicture : PUBLIC_FOLDER + '/post/4.jpeg'}
+                alt='background'
+                className='profile-right-top-cover-coverImg'
+              />
+              <img
+                src={user ? user.profilePicture : PUBLIC_FOLDER + '/person/noAvatar.png'}
+                alt='profile'
+                className='profile-right-top-cover-userImg'
+              />
             </div>
             <div className='profile-right-top-info'>
               <h4 className='profile-right-top-info-name'>{user && user.username}</h4>
