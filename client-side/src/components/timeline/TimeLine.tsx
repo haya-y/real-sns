@@ -4,37 +4,40 @@ import { Post } from '../post/Post';
 import { Share } from '../share/Share';
 import './TimeLine.styles';
 import { StyledTimeLineDiv } from './TimeLine.styles';
-import { Posts } from '../../dummyData';
+import { Post as PostType } from '../../types/Post.types';
+// import { Posts } from '../../dummyData';
 
 type Props = {
-  username?: any;
+  userId?: string;
+  username?: string;
 };
 
-export const TimeLine = ({ username }: Props) => {
-  const [posts, setPosts] = useState<any[]>([]);
-  console.log({ posts });
+// TODO userIdの初期値はダミー
+export const TimeLine = ({ userId = '6304d19040d4092261cbeea3', username }: Props) => {
+  const [posts, setPosts] = useState<PostType[]>([]);
 
   useEffect(() => {
     const fetchUserPosts = async () => {
       const response = username
         ? await axios.get(`/posts/profile/${username}`)
-        : await axios.get('/posts/timeline/6304d19040d4092261cbeea3');
+        : await axios.get(`/posts/timeline/${userId}`);
       setPosts(response.data);
     };
     fetchUserPosts();
-  }, [username]);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <StyledTimeLineDiv>
       <div className='timelineWrapper'>
         <Share />
-        {/* {posts.map((post) => (
-          <Post post={post} key={post._id} />
-        ))} */}
-        {/* ダミーデータ */}
-        {Posts.map((post) => (
+        {posts.map((post) => (
           <Post post={post} key={post._id} />
         ))}
+        {/* ダミーデータ */}
+        {/* {Posts.map((post) => (
+          <Post post={post} key={post._id} />
+        ))} */}
       </div>
     </StyledTimeLineDiv>
   );

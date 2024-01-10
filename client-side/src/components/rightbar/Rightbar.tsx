@@ -1,16 +1,16 @@
+import { User } from '../../types/User.types';
 import { HomeRightbar } from '../homeRightbar/HomeRightbar';
 import { ProfileRightbar } from '../profileRightbar/ProfileRightbar';
 import { StyledRightbarDiv } from './Rightbar.styles';
 
 type Props = {
-  user?: any;
-  profile?: boolean;
+  user?: User;
 };
 
-export const Rightbar = ({ user, profile }: Props) => {
+export const Rightbar = ({ user }: Props) => {
   return (
     <StyledRightbarDiv className='rightbar'>
-      <div className='rightbarWrapper'>{profile ? <ProfileRightbar /> : <HomeRightbar />}</div>
+      <div className='rightbarWrapper'>{user ? <ProfileRightbar /> : <HomeRightbar />}</div>
     </StyledRightbarDiv>
   );
 };
