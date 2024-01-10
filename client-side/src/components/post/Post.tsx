@@ -2,11 +2,10 @@ import { MoreVert as MUIMoreVert } from '@mui/icons-material';
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { format } from 'timeago.js'; // .envで「GENERATE_SOURCEMAP=false」を書けばWarningが消える
+import { PUBLIC_FOLDER } from '../../constants';
 import { Post as PostType } from '../../types/Post.types';
 import { StyledPostDiv } from './Post.styles';
-// TODO Warningが発生する
-// import { format } from 'timeago.js';
-import { PUBLIC_FOLDER } from '../../constants';
 // import { Users } from '../../dummyData';
 import { User } from '../../types/User.types';
 
@@ -46,9 +45,7 @@ export const Post = ({ post: { likes, userId, desc, img, createdAt } }: Props) =
               />
             </Link>
             <span className='postWrapper-top-left-userName'>{user && user.username}</span>
-            {/* TODO FormatでWarningが発生する */}
-            {/* <span className='postWrapper-top-left-date'>{format(post.createdAt)}</span> */}
-            <span className='postWrapper-top-left-date'>{String(createdAt)}</span>
+            <span className='postWrapper-top-left-date'>{format(createdAt)}</span>
           </div>
           <div className='postWrapper-top-right'>
             <MUIMoreVert />
