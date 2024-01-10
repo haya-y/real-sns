@@ -7,26 +7,22 @@ import { StyledPostDiv } from './Post.styles';
 // TODO Warningが発生する
 // import { format } from 'timeago.js';
 import { PUBLIC_FOLDER } from '../../constants';
-import { Users } from '../../dummyData';
+// import { Users } from '../../dummyData';
 import { User } from '../../types/User.types';
 
 type Props = {
   post: PostType;
 };
 
-export const Post = (props: Props) => {
-  const {
-    post: { likes, userId, desc, img, createdAt },
-  } = props;
-
+export const Post = ({ post: { likes, userId, desc, img, createdAt } }: Props) => {
   const [like, setLike] = useState(likes.length);
   const [pushLike, setPushLike] = useState(false);
-  const [user, setUser] = useState<User | undefined>(Users.find((user) => user._id === userId)); // ダミー用
-  // const [user, setUser] = useState<User | null>(null);
+  // const [user, setUser] = useState<User | undefined>(Users.find((user) => user._id === userId)); // ダミー用
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const response = await axios.get(`/users?userId=${userId}`);
+      const response = await axios.get(`/users/${userId}`);
       setUser(response.data);
     };
     fetchUsers();
@@ -44,8 +40,8 @@ export const Post = (props: Props) => {
           <div className='postWrapper-top-left'>
             <Link to={`/profile/${user && user.username}`}>
               <img
-                src={(user && PUBLIC_FOLDER + user.profilePicture) || PUBLIC_FOLDER + '/person/noAvatar.png'}
-                alt=''
+                src={(user && user.profilePicture) || PUBLIC_FOLDER + '/person/noAvatar.png'}
+                alt='post'
                 className='postWrapper-top-left-profileImg'
               />
             </Link>
