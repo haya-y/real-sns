@@ -1,5 +1,5 @@
-import { Post } from './type/Post.types';
-import { User } from './type/User.types';
+import { Post } from './types/Post.types';
+import { User } from './types/User.types';
 
 export const Users: User[] = [
   {

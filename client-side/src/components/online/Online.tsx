@@ -1,15 +1,12 @@
-import React from 'react';
+import { PUBLIC_FOLDER } from '../../constants/index';
+import { User } from '../../types/User.types';
 import { StyledOnlineDiv } from './Online.styles';
-import { User } from '../../type/User.types';
 
 type Props = {
   user: User;
 };
 
 export const Online = ({ user: { profilePicture, username } }: Props) => {
-  // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  const PUBLIC_FOLDER = '/assets';
-
   return (
     <StyledOnlineDiv>
       <li className='rightbarFriend'>

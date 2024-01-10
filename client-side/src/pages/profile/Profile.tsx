@@ -5,14 +5,12 @@ import { Rightbar } from '../../components/rightbar/Rightbar';
 import { Sidebar } from '../../components/sidebar/Sidebar';
 import { TimeLine } from '../../components/timeline/TimeLine';
 import { Topbar } from '../../components/topbar/Topbar';
+import { PUBLIC_FOLDER } from '../../constants';
 import { Users } from '../../dummyData';
-import { User } from '../../type/User.types';
+import { User } from '../../types/User.types';
 import { StyledProfileDiv } from './Profile.styles';
 
 export const Profile = () => {
-  // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  const PUBLIC_FOLDER = '/assets'; // TODO 「'assets'ではなく、'/assets'でパス指定しないと画像が表示されない」
-
   // const [user, setUser] = useState<User | null>(null);
   const [user, setUser] = useState<User | null>(Users[0]); // ダミー用
   const username = useParams().username;
@@ -25,8 +23,6 @@ export const Profile = () => {
     };
     fetchUser();
   }, [username]);
-
-  console.log({ username });
 
   return (
     <StyledProfileDiv>

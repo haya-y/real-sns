@@ -1,6 +1,7 @@
 import * as MUI from '@mui/icons-material';
 import axios from 'axios';
 import React, { useCallback, useState } from 'react';
+import { PUBLIC_FOLDER } from '../../constants';
 import { StyledShareDiv } from './Share.styles';
 
 type Props = {
@@ -8,9 +9,6 @@ type Props = {
 };
 
 export const Share = ({ username }: Props) => {
-  // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  const PUBLIC_FOLDER = '/assets';
-
   const [postText, setPostText] = useState('');
 
   const onClickPostBtn = useCallback(async () => {

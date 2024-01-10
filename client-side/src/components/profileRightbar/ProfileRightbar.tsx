@@ -1,9 +1,7 @@
+import { PUBLIC_FOLDER } from '../../constants';
 import { StyledProfileRightbarDiv } from './ProfileRightbar.styles';
 
 export const ProfileRightbar = () => {
-  // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  const PUBLIC_FOLDER = '/assets';
-
   return (
     <StyledProfileRightbarDiv>
       <h4 className='rightbarUserTitle'>ユーザー情報</h4>

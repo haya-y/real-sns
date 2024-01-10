@@ -11,13 +11,13 @@ export const Sidebar = () => {
         <ul className='sidebarWrapper-list'>
           <li className='sidebarWrapper-list-item'>
             <MUI.Home className='sidebarWrapper-list-item-icon' />
-            <Link to={'/'} style={{ textDecoration: 'none', color: 'black' }}>
+            <Link className='sidebarWrapper-list-item-icon-link' to={'/'} style={{}}>
               <span className='sidebarWrapper-list-item-icon-text'>ホーム</span>
             </Link>
           </li>
           <li className='sidebarWrapper-list-item'>
             <MUI.Search className='sidebarWrapper-list-item-icon' />
-            <Link to={'/'} style={{ textDecoration: 'none', color: 'black' }}>
+            <Link className='sidebarWrapper-list-item-icon-link' to={'/'} style={{}}>
               <span className='sidebarWrapper-list-item-icon-text'>検索</span>
             </Link>
           </li>
@@ -34,7 +34,7 @@ export const Sidebar = () => {
             <span className='sidebarWrapper-list-item-icon-text'>ブックマーク</span>
           </li>
           {/* TODO ⇩のリンクはダミー */}
-          <Link to={'/profile/hayate'} style={{ textDecoration: 'none', color: 'black' }}>
+          <Link className='sidebarWrapper-list-item-icon-link' to={'/profile/testPerson'} style={{}}>
             <li className='sidebarWrapper-list-item'>
               <MUI.Person className='sidebarWrapper-list-item-icon' />
               <span className='sidebarWrapper-list-item-icon-text'>プロフィール</span>

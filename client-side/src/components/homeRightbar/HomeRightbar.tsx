@@ -1,11 +1,9 @@
+import { PUBLIC_FOLDER } from '../../constants';
 import { Users } from '../../dummyData';
 import { Online } from '../online/Online';
 import { StyledHomeRightbarDiv } from './HomeRightbar.styles';
 
 export const HomeRightbar = () => {
-  // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  const PUBLIC_FOLDER = '/assets';
-
   return (
     <StyledHomeRightbarDiv>
       <div className='homeRightbarWrapper'>

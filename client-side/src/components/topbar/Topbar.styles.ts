@@ -14,11 +14,15 @@ export const StyledTopbarDiv = styled.div`
   .topbarLeft {
     flex: 3;
 
-    &-log {
-      font-size: 24px;
-      color: white;
-      font-weight: bold;
-      margin-left: 20px;
+    &-link {
+      text-decoration: none;
+
+      &-log {
+        font-size: 24px;
+        color: white;
+        font-weight: 700;
+        margin-left: 20px;
+      }
     }
   }
 

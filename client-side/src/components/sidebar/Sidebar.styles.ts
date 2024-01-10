@@ -38,6 +38,11 @@ export const StyledSidebarDiv = styled.div`
           font-size: 35px !important;
           margin-right: 10px;
 
+          &-link {
+            text-decoration: none;
+            color: black;
+          }
+
           &-text {
             font-size: 20px;
             padding-top: 3px;
