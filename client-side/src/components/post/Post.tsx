@@ -2,12 +2,13 @@ import { MoreVert as MUIMoreVert } from '@mui/icons-material';
 import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Post as PostType } from '../../type/Post.types';
+import { Post as PostType } from '../../types/Post.types';
 import { StyledPostDiv } from './Post.styles';
 // TODO Warningが発生する
 // import { format } from 'timeago.js';
-import { User } from '../../type/User.types';
+import { PUBLIC_FOLDER } from '../../constants';
 import { Users } from '../../dummyData';
+import { User } from '../../types/User.types';
 
 type Props = {
   post: PostType;
@@ -17,9 +18,6 @@ export const Post = (props: Props) => {
   const {
     post: { likes, userId, desc, img, createdAt },
   } = props;
-
-  // const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  const PUBLIC_FOLDER = '/assets';
 
   const [like, setLike] = useState(likes.length);
   const [pushLike, setPushLike] = useState(false);
@@ -76,4 +74,4 @@ export const Post = (props: Props) => {
       </div>
     </StyledPostDiv>
   );
-}
+};
