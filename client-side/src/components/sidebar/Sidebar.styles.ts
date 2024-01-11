@@ -12,40 +12,40 @@ export const StyledSidebarDiv = styled.div`
       margin: 0;
       list-style: none;
 
-      &-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        padding: 4px 6px;
-        cursor: pointer;
-        box-shadow: 0px 0px 20px -10px #78bdf2;
-        border-radius: 14px;
+      &-link {
+        text-decoration: none;
+        color: black;
 
-        &:hover {
-          box-shadow: none;
-          font-weight: bold;
-          .sidebarWrapper-list-item-icon {
-            transform: scale(1.1);
-          }
-        }
+        &-item {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+          padding: 4px 6px;
+          cursor: pointer;
+          box-shadow: 0px 0px 20px -10px #78bdf2;
+          border-radius: 14px;
 
-        &:active {
-          transform: translateY(3px);
-          transition: all 0.1s;
-        }
-
-        &-icon {
-          font-size: 35px !important;
-          margin-right: 10px;
-
-          &-link {
-            text-decoration: none;
-            color: black;
+          &-icon {
+            font-size: 35px !important;
+            margin-right: 10px;
           }
 
           &-text {
             font-size: 20px;
             padding-top: 3px;
+          }
+
+          &:hover {
+            box-shadow: none;
+            font-weight: bold;
+            .sidebarWrapper-list-item-icon {
+              transform: scale(1.1);
+            }
+          }
+
+          &:active {
+            transform: translateY(3px);
+            transition: all 0.1s;
           }
         }
       }
