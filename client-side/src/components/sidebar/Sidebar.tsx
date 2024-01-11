@@ -9,41 +9,49 @@ export const Sidebar = () => {
     <StyledSidebarDiv>
       <div className='sidebarWrapper'>
         <ul className='sidebarWrapper-list'>
-          <li className='sidebarWrapper-list-item'>
-            <MUI.Home className='sidebarWrapper-list-item-icon' />
-            <Link className='sidebarWrapper-list-item-icon-link' to={'/'} style={{}}>
-              <span className='sidebarWrapper-list-item-icon-text'>ホーム</span>
-            </Link>
-          </li>
-          <li className='sidebarWrapper-list-item'>
-            <MUI.Search className='sidebarWrapper-list-item-icon' />
-            <Link className='sidebarWrapper-list-item-icon-link' to={'/'} style={{}}>
-              <span className='sidebarWrapper-list-item-icon-text'>検索</span>
-            </Link>
-          </li>
-          <li className='sidebarWrapper-list-item'>
-            <MUI.Notifications className='sidebarWrapper-list-item-icon' />
-            <span className='sidebarWrapper-list-item-icon-text'>通知</span>
-          </li>
-          <li className='sidebarWrapper-list-item'>
-            <MUI.MessageRounded className='sidebarWrapper-list-item-icon' />
-            <span className='sidebarWrapper-list-item-icon-text'>メッセージ</span>
-          </li>
-          <li className='sidebarWrapper-list-item'>
-            <MUI.Bookmark className='sidebarWrapper-list-item-icon' />
-            <span className='sidebarWrapper-list-item-icon-text'>ブックマーク</span>
-          </li>
-          {/* TODO ⇩のリンクはダミー */}
-          <Link className='sidebarWrapper-list-item-icon-link' to={'/profile/hayate'} style={{}}>
-            <li className='sidebarWrapper-list-item'>
-              <MUI.Person className='sidebarWrapper-list-item-icon' />
-              <span className='sidebarWrapper-list-item-icon-text'>プロフィール</span>
+          <Link className='sidebarWrapper-list-link' to={'/'} style={{}}>
+            <li className='sidebarWrapper-list-link-item'>
+              <MUI.Home className='sidebarWrapper-list-link-item-icon' />
+              <span className='sidebarWrapper-list-link-item-text'>ホーム</span>
             </li>
           </Link>
-          <li className='sidebarWrapper-list-item'>
-            <MUI.Settings className='sidebarWrapper-list-item-icon' />
-            <span className='sidebarWrapper-list-item-icon-text'>設定</span>
-          </li>
+          <Link className='sidebarWrapper-list-link' to={''} style={{}}>
+            <li className='sidebarWrapper-list-link-item'>
+              <MUI.Search className='sidebarWrapper-list-link-item-icon' />
+              <span className='sidebarWrapper-list-link-item-text'>検索</span>
+            </li>
+          </Link>
+          <Link className='sidebarWrapper-list-link' to={''} style={{}}>
+            <li className='sidebarWrapper-list-link-item'>
+              <MUI.Notifications className='sidebarWrapper-list-link-item-icon' />
+              <span className='sidebarWrapper-list-link-item-text'>通知</span>
+            </li>
+          </Link>
+          <Link className='sidebarWrapper-list-link' to={''} style={{}}>
+            <li className='sidebarWrapper-list-link-item'>
+              <MUI.MessageRounded className='sidebarWrapper-list-link-item-icon' />
+              <span className='sidebarWrapper-list-link-item-text'>メッセージ</span>
+            </li>
+          </Link>
+          <Link className='sidebarWrapper-list-link' to={''} style={{}}>
+            <li className='sidebarWrapper-list-link-item'>
+              <MUI.Bookmark className='sidebarWrapper-list-link-item-icon' />
+              <span className='sidebarWrapper-list-link-item-text'>ブックマーク</span>
+            </li>
+          </Link>
+          {/* TODO ⇩のProfileページのリンクはダミー */}
+          <Link className='sidebarWrapper-list-link' to={'/profile/hayate'} style={{}}>
+            <li className='sidebarWrapper-list-link-item'>
+              <MUI.Person className='sidebarWrapper-list-link-item-icon' />
+              <span className='sidebarWrapper-list-link-item-text'>プロフィール</span>
+            </li>
+          </Link>
+          <Link className='sidebarWrapper-list-link' to={''} style={{}}>
+            <li className='sidebarWrapper-list-link-item'>
+              <MUI.Settings className='sidebarWrapper-list-link-item-icon' />
+              <span className='sidebarWrapper-list-link-item-text'>設定</span>
+            </li>
+          </Link>
         </ul>
         <hr className='sidebarWrapper-line' />
         <ul className='sidebarWrapper-friendList'>
