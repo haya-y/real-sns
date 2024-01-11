@@ -7,7 +7,9 @@ import { Register } from './pages/register/Register';
 import { AuthContext } from './redux/AuthContext';
 
 export const App = () => {
-  const { user } = useContext(AuthContext);
+  const {
+    state: { user },
+  } = useContext(AuthContext);
   return (
     <BrowserRouter>
       <Routes>
