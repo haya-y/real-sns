@@ -36,9 +36,9 @@ export const StyledSidebarDiv = styled.div`
           }
 
           &:hover {
-            box-shadow: none;
+            box-shadow: 0px 0px 25px -5px #789bf2;
             font-weight: bold;
-            .sidebarWrapper-list-item-icon {
+            .sidebarWrapper-list-link-item-icon {
               transform: scale(1.1);
             }
           }
