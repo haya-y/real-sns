@@ -8,7 +8,7 @@ export enum LOGIN {
 }
 
 /** LOGINの3つの定数の型 */
-export type LoginType = LOGIN.START | LOGIN.SUCCESS | LOGIN.ERROR;
+type LoginType = LOGIN.START | LOGIN.SUCCESS | LOGIN.ERROR;
 
 /** dispatchの引数に入れるactionの型 */
 export type AuthAction = {
