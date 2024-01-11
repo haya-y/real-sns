@@ -20,7 +20,7 @@ export const AuthContextProvider = ({ children }: Props) => {
   return (
     <AuthContext.Provider
       value={{
-        state: { ...state },
+        state,
         dispatch,
       }}
     >

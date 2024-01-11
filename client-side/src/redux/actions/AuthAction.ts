@@ -10,7 +10,7 @@ export const LoginSuccess = (user: User) => ({
   payload: user,
 });
 
-export const LoginError = (error: any) => ({
+export const LoginError = (error: unknown) => ({
   type: LOGIN.ERROR,
   payload: error,
 });
