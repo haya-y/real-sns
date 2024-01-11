@@ -10,7 +10,7 @@ export const StyledSidebarFriendLi = styled.li`
   &:hover {
     font-weight: bold;
     box-shadow: 0px 0px 20px -10px #78bdf2;
-    .sidebarFriendImg {
+    .sidebarFriend-link-img {
       transform: scale(1.1);
     }
   }
@@ -20,14 +20,21 @@ export const StyledSidebarFriendLi = styled.li`
     transition: all 0.1s;
   }
 
-  .sidebarFriendImg {
-    width: 32px;
-    height: 32px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-right: 15px;
-  }
+  .sidebarFriend-link {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
 
-  .sidebarFriendName {
+    &-img {
+      width: 32px;
+      height: 32px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    &-name {
+    }
   }
 `;
