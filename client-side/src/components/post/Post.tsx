@@ -1,37 +1,54 @@
 import { MoreVert as MUIMoreVert } from '@mui/icons-material';
-import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { format } from 'timeago.js'; // .envで「GENERATE_SOURCEMAP=false」を書けばWarningが消える
+// timeago.jsは、.envで「GENERATE_SOURCEMAP=false」を書けばWarningが消える
+import { format } from 'timeago.js';
+import { fetchLikeStatus, fetchLikes } from '../../api/post/PostApi';
+import { fetchPostUser } from '../../api/user/PostUser';
 import { PUBLIC_FOLDER } from '../../constants';
+import { AuthContext } from '../../redux/AuthContext';
 import { Post as PostType } from '../../types/Post.types';
-import { StyledPostDiv } from './Post.styles';
-// import { Users } from '../../dummyData';
 import { User } from '../../types/User.types';
+import { StyledPostDiv } from './Post.styles';
 
 type Props = {
   post: PostType;
 };
 
-export const Post = ({ post: { likes, userId, desc, img, createdAt } }: Props) => {
-  const [like, setLike] = useState(likes.length);
+export const Post = ({ post: { _id: postId, likes, userId, desc, img, createdAt } }: Props) => {
+  /** 投稿のいいね数 */
+  const [likeNumber, setLikeNumber] = useState(likes.length);
+  /** 既にいいねしたかどうか */
   const [pushLike, setPushLike] = useState(false);
-  // const [user, setUser] = useState<User | undefined>(Users.find((user) => user._id === userId)); // ダミー用
+  /** 投稿をしたユーザー */
   const [user, setUser] = useState<User | null>(null);
+  /** 現在ログインをしているユーザー */
+  const {
+    state: { user: loginUser },
+  } = useContext(AuthContext);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      const response = await axios.get(`/users/?userId=${userId}`);
-      setUser(response.data);
+    /** 投稿したユーザー情報の取得 */
+    const updatePostUser = async () => {
+      const postUser = await fetchPostUser(userId);
+      setUser(postUser);
     };
-    fetchUsers();
+    /** いいねが既に押下済みかを確認 */
+    const updateLikeStatus = async () => {
+      const likeStatus = await fetchLikeStatus(postId, loginUser?._id ?? '');
+      setPushLike(likeStatus);
+    };
+    updatePostUser();
+    updateLikeStatus();
     // eslint-disable-next-line
   }, []);
 
-  const handleLike = useCallback(() => {
-    setLike((prev) => (!pushLike ? prev + 1 : prev - 1));
-    setPushLike((prev) => !prev);
-  }, [pushLike]);
+  /** いいねの操作 */
+  const handleLike = useCallback(async () => {
+    const { likeNumber, isPushed } = await fetchLikes(postId, loginUser?._id ?? '');
+    setLikeNumber(likeNumber);
+    setPushLike(isPushed);
+  }, [postId, loginUser]);
 
   return (
     <StyledPostDiv>
@@ -58,11 +75,16 @@ export const Post = ({ post: { likes, userId, desc, img, createdAt } }: Props) =
         </div>
         <div className='postWrapper-bottom' onClick={() => handleLike()}>
           <div className='postWrapper-bottom-left'>
-            <img className='postWrapper-bottom-left-img' src={PUBLIC_FOLDER + '/heart.png'} alt='likeIcon' />
-            <span className='postWrapper-bottom-left-likeCounter'>{like}人がいいねを押しました。</span>
+            <img
+              className='postWrapper-bottom-left-img'
+              src={PUBLIC_FOLDER + '/heart.png'}
+              alt='likeIcon'
+              style={{ opacity: pushLike ? '0.5' : '1' }}
+            />
+            <span className='postWrapper-bottom-left-likeCounter'>{likeNumber}人がいいねを押しました。</span>
           </div>
           <div className='postWrapper-bottom-right'>
-            <span className='postWrapper-bottom-right-comment'>{10}: コメント</span>
+            <span className='postWrapper-bottom-right-comment'>{0}: コメント</span>
           </div>
         </div>
       </div>
