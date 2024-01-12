@@ -24,6 +24,8 @@ export const Profile = () => {
     // eslint-disable-next-line
   }, []);
 
+  console.log({ user });
+
   return (
     <StyledProfileDiv>
       <Topbar />
@@ -33,12 +35,12 @@ export const Profile = () => {
           <div className='profile-right-top'>
             <div className='profile-right-top-cover'>
               <img
-                src={user ? user.coverPicture : PUBLIC_FOLDER + '/post/4.jpeg'}
+                src={(user && user.profilePicture) || PUBLIC_FOLDER + '/post/4.jpeg'}
                 alt='background'
                 className='profile-right-top-cover-coverImg'
               />
               <img
-                src={user ? user.profilePicture : PUBLIC_FOLDER + '/person/noAvatar.png'}
+                src={(user && user.profilePicture) || PUBLIC_FOLDER + '/person/noAvatar.png'}
                 alt='profile'
                 className='profile-right-top-cover-userImg'
               />
