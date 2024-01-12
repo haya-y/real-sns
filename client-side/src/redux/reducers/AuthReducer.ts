@@ -1,18 +1,20 @@
-export const AuthReducer = (state: any, action: any) => {
+import { AuthAction, AuthState, LOGIN } from '../types/AuthTypes';
+
+export const AuthReducer = (state: AuthState, action: AuthAction) => {
   switch (action.type) {
-    case 'LOGIN_START':
+    case LOGIN.START:
       return {
         user: null,
         isFetching: true,
         error: false,
       };
-    case 'LOGIN_SUCCESS':
+    case LOGIN.SUCCESS:
       return {
         user: action.payload,
         isFetching: false,
         error: false,
       };
-    case 'LOGIN_ERROR':
+    case LOGIN.ERROR:
       return {
         user: null,
         isFetching: false,

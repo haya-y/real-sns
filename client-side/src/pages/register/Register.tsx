@@ -1,35 +1,40 @@
 import axios from 'axios';
-import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useCallback, useContext, useRef } from 'react';
+import { AuthContext } from '../../redux/AuthContext';
+import { LOGIN } from '../../redux/types/AuthTypes';
 import { StyledRegisterDiv } from './Register.styles';
 
 export const Register = () => {
-  const username = useRef<any>('');
-  const email = useRef<any>('');
-  const password = useRef<any>('');
-  const passwordConfirmation = useRef<any>('');
+  const username = useRef<HTMLInputElement>(null);
+  const email = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
+  const passwordConfirmation = useRef<HTMLInputElement>(null);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const { dispatch } = useContext(AuthContext);
+
+  const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (password.current.value !== passwordConfirmation.current.value) {
-      passwordConfirmation.current.setCustomValidity('パスワードが違います。');
+    if (password.current?.value !== passwordConfirmation.current?.value) {
+      // TODO setCustomValidityでは一度パスワードを間違えると再リロードが必要になる
+      passwordConfirmation.current?.setCustomValidity('パスワードが一致していません。');
     } else {
       try {
         const user = {
-          username: username.current.value,
-          email: email.current.value,
-          password: password.current.value,
+          username: username.current?.value,
+          email: email.current?.value,
+          password: password.current?.value,
         };
-        await axios.post('/auth/register', user);
-        navigate('/login');
+        const response = await axios.post('/auth/register', user);
+        dispatch({ type: LOGIN.SUCCESS, payload: response.data });
+        // navigate('/login');
       } catch (err) {
         console.log(err);
       }
     }
-  };
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <StyledRegisterDiv>
@@ -41,8 +46,20 @@ export const Register = () => {
         <div className='registerWrapper-right'>
           <form className='registerWrapper-right-box' onSubmit={(e) => handleSubmit(e)}>
             <p className='registerWrapper-right-box-msg'>新規登録はこちら</p>
-            <input type='text' className='registerWrapper-right-box-registerInput' placeholder='ユーザー名' required ref={username} />
-            <input type='email' className='registerWrapper-right-box-registerInput' placeholder='Eメール' required ref={email} />
+            <input
+              type='text'
+              className='registerWrapper-right-box-registerInput'
+              placeholder='ユーザー名'
+              required
+              ref={username}
+            />
+            <input
+              type='email'
+              className='registerWrapper-right-box-registerInput'
+              placeholder='Eメール'
+              required
+              ref={email}
+            />
             <input
               type='password'
               className='registerWrapper-right-box-registerInput'

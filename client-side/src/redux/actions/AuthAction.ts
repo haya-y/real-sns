@@ -1,13 +1,16 @@
-export const LoginStart = (user: any) => ({
-  type: "LOGIN_START"
-})
+import { User } from '../../types/User.types';
+import { LOGIN } from '../types/AuthTypes';
 
-export const LoginSuccess = (user: any) => ({
-  type: "LOGIN_SUCCESS",
+export const LoginStart = (user: User) => ({
+  type: LOGIN.START,
+});
+
+export const LoginSuccess = (user: User) => ({
+  type: LOGIN.SUCCESS,
   payload: user,
-})
+});
 
-export const LoginError = (error: any) => ({
-  type: "LOGIN_ERROR",
-  payload: error
-})
+export const LoginError = (error: unknown) => ({
+  type: LOGIN.ERROR,
+  payload: error,
+});

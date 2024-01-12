@@ -1,21 +1,14 @@
 import { createContext, ReactNode, useReducer } from 'react';
 import { AuthReducer } from './reducers/AuthReducer';
+import { AuthContextType, AuthState } from './types/AuthTypes';
 
-type AuthContextState = {
-  user: any;
-  isFetching: boolean;
-  error: boolean;
-  dispatch: React.Dispatch<any>;
-};
-
-const initialState: AuthContextState = {
+const initialState: AuthState = {
   user: null,
   isFetching: false,
   error: false,
-  dispatch: () => {},
 };
 
-export const AuthContext = createContext<AuthContextState>(initialState);
+export const AuthContext = createContext<AuthContextType>({ state: initialState, dispatch: () => {} });
 
 type Props = {
   children: ReactNode;
@@ -23,12 +16,11 @@ type Props = {
 
 export const AuthContextProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
+
   return (
     <AuthContext.Provider
       value={{
-        user: state.user,
-        isFetching: state.isFetching,
-        error: state.error,
+        state,
         dispatch,
       }}
     >

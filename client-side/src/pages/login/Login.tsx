@@ -1,23 +1,26 @@
-import React, { useContext, useRef } from 'react';
-import { loginCall } from '../../actionCalls';
+import React, { useCallback, useContext, useRef } from 'react';
+import { loginCall } from '../../ActionCalls';
 import { AuthContext } from '../../redux/AuthContext';
 import { StyledLoginDiv } from './Login.styles';
 
 export const Login = () => {
-  const email = useRef<any>('');
-  const password = useRef<any>('');
+  const email = useRef<HTMLInputElement>(null);
+  const password = useRef<HTMLInputElement>(null);
   const { dispatch } = useContext(AuthContext);
 
-  const handleSubmit = (e: React.FormEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    loginCall(
-      {
-        email: email.current.value,
-        password: password.current.value,
-      },
-      dispatch,
-    );
-  };
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      loginCall(
+        {
+          email: email.current?.value ?? '',
+          password: password.current?.value ?? '',
+        },
+        dispatch,
+      );
+    },
+    [dispatch],
+  );
 
   return (
     <StyledLoginDiv>
@@ -26,10 +29,16 @@ export const Login = () => {
           <h3 className='loginWrapper-left-logo'>Real SNS</h3>
           <span className='loginWrapper-left-desc'>本格的なSNSを、自分の手で</span>
         </div>
-        <div className='loginWrapper-right' onSubmit={(e) => handleSubmit(e)}>
-          <form className='loginWrapper-right-box'>
+        <div className='loginWrapper-right'>
+          <form className='loginWrapper-right-box' onSubmit={(e) => handleSubmit(e)}>
             <p className='loginWrapper-right-box-msg'>ログインはこちら</p>
-            <input type='email' className='loginWrapper-right-box-loginInput' placeholder='Eメール' required ref={email} />
+            <input
+              type='email'
+              className='loginWrapper-right-box-loginInput'
+              placeholder='Eメール'
+              required
+              ref={email}
+            />
             <input
               type='password'
               className='loginWrapper-right-box-loginInput'
