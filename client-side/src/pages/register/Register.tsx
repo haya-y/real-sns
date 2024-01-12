@@ -1,8 +1,8 @@
 import axios from 'axios';
-import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useCallback, useContext, useRef } from 'react';
+import { AuthContext } from '../../redux/AuthContext';
+import { LOGIN } from '../../redux/types/AuthTypes';
 import { StyledRegisterDiv } from './Register.styles';
-import { useCallback } from 'react';
 
 export const Register = () => {
   const username = useRef<HTMLInputElement>(null);
@@ -10,7 +10,9 @@ export const Register = () => {
   const password = useRef<HTMLInputElement>(null);
   const passwordConfirmation = useRef<HTMLInputElement>(null);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  const { dispatch } = useContext(AuthContext);
 
   const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,9 +26,9 @@ export const Register = () => {
           email: email.current?.value,
           password: password.current?.value,
         };
-        await axios.post('/auth/register', user);
-        // TODO navigate('/')でホームに移動したいが、登録後に画面遷移しない
-        navigate('/login');
+        const response = await axios.post('/auth/register', user);
+        dispatch({ type: LOGIN.SUCCESS, payload: response.data });
+        // navigate('/login');
       } catch (err) {
         console.log(err);
       }
