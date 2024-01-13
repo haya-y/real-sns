@@ -1,28 +1,25 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { fetchUserByName } from '../../api/user/UserApi';
 import { Rightbar } from '../../components/rightbar/Rightbar';
 import { Sidebar } from '../../components/sidebar/Sidebar';
 import { TimeLine } from '../../components/timeline/TimeLine';
 import { Topbar } from '../../components/topbar/Topbar';
-// import { Users } from '../../dummyData';
+import { PUBLIC_FOLDER } from '../../constants';
 import { User } from '../../types/User.types';
 import { StyledProfileDiv } from './Profile.styles';
-import { PUBLIC_FOLDER } from '../../constants';
 
 export const Profile = () => {
   const [user, setUser] = useState<User>();
-  // const [user, setUser] = useState<User | null>(Users[0]); // ダミー用
   const username = useParams().username;
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await axios.get(`/users/?username=${username}`);
-      setUser(response.data);
+      const fetchedUser = await fetchUserByName(username ?? '');
+      setUser(fetchedUser);
     };
     fetchUser();
-    // eslint-disable-next-line
-  }, []);
+  }, [username]);
 
   return (
     <StyledProfileDiv>
@@ -33,12 +30,12 @@ export const Profile = () => {
           <div className='profile-right-top'>
             <div className='profile-right-top-cover'>
               <img
-                src={user ? user.coverPicture : PUBLIC_FOLDER + '/post/4.jpeg'}
+                src={(user && user.profilePicture) || PUBLIC_FOLDER + '/post/4.jpeg'}
                 alt='background'
                 className='profile-right-top-cover-coverImg'
               />
               <img
-                src={user ? user.profilePicture : PUBLIC_FOLDER + '/person/noAvatar.png'}
+                src={(user && user.profilePicture) || PUBLIC_FOLDER + '/person/noAvatar.png'}
                 alt='profile'
                 className='profile-right-top-cover-userImg'
               />

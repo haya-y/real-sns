@@ -62,6 +62,7 @@ export const StyledTopbarDiv = styled.div`
 
     &-icons {
       display: flex;
+      align-items: center;
 
       &-items {
         margin-right: 15px;
@@ -82,13 +83,14 @@ export const StyledTopbarDiv = styled.div`
           justify-content: center;
           font-size: 12px;
         }
-      }
-      img {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        cursor: pointer;
-        object-fit: cover;
+
+        img {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          cursor: pointer;
+          object-fit: cover;
+        }
       }
     }
   }

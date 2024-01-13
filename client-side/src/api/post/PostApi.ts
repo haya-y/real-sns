@@ -1,0 +1,58 @@
+import axios from 'axios';
+import { Post } from '../../types/Post.types';
+
+/** いいね更新後の返却値の型 */
+type UpdatedLikes = {
+  /** 更新後のいいね数 */
+  likeNumber: number;
+  /** いいね押下済みか */
+  isPushed: boolean;
+};
+
+/** 投稿ボックスから入力される値の型 */
+export type CreatedPost = Pick<Post, 'userId' | 'desc'>;
+
+/**
+ * いいねの更新状態を取得
+ * @param postId
+ * @param loginUserId
+ */
+export const fetchLikeStatus = async (postId: string, loginUserId: string): Promise<boolean> => {
+  try {
+    const response = await axios.get(`/posts/${postId}/like/?userId=${loginUserId}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+/**
+ * いいねの更新処理
+ * @param postId
+ * @param loginUserId
+ */
+export const fetchLikes = async (postId: string, loginUserId: string): Promise<UpdatedLikes> => {
+  try {
+    const response = await axios.put(`/posts/${postId}/like`, { userId: loginUserId });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+/**
+ * タイムラインの新しい投稿を作成
+ * @param newPost 新しい投稿内容
+ * @returns 作成された投稿のデータ
+ */
+export const createPost = async (newPost: CreatedPost): Promise<Post> => {
+  try {
+    const response = await axios.post('/posts', newPost);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

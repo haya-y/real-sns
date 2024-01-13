@@ -1,31 +1,32 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Post } from '../post/Post';
 import { Share } from '../share/Share';
 import './TimeLine.styles';
 import { StyledTimeLineDiv } from './TimeLine.styles';
 import { Post as PostType } from '../../types/Post.types';
-// import { Posts } from '../../dummyData';
+import { AuthContext } from '../../redux/AuthContext';
 
 type Props = {
-  userId?: string;
   username?: string;
 };
 
-// TODO userIdの初期値はダミー
-export const TimeLine = ({ userId = '6304d19040d4092261cbeea3', username }: Props) => {
+export const TimeLine = ({ username }: Props) => {
   const [posts, setPosts] = useState<PostType[]>([]);
+  const {
+    state: { user },
+  } = useContext(AuthContext);
 
+  // TODO user?._id以外のuserのプロパティが変更された場合でも、↓が実行されるかを確認する
   useEffect(() => {
     const fetchUserPosts = async () => {
       const response = username
-        ? await axios.get(`/posts/profile/${username}`)
-        : await axios.get(`/posts/timeline/${userId}`);
+        ? await axios.get(`/posts/profile/${username}`) // プロフィールの場合
+        : await axios.get(`/posts/timeline/${user?._id}`); // ホームの場合
       setPosts(response.data);
     };
     fetchUserPosts();
-    // eslint-disable-next-line
-  }, []);
+  }, [username, user?._id]);
 
   return (
     <StyledTimeLineDiv>
@@ -34,10 +35,6 @@ export const TimeLine = ({ userId = '6304d19040d4092261cbeea3', username }: Prop
         {posts.map((post) => (
           <Post post={post} key={post._id} />
         ))}
-        {/* ダミーデータ */}
-        {/* {Posts.map((post) => (
-          <Post post={post} key={post._id} />
-        ))} */}
       </div>
     </StyledTimeLineDiv>
   );

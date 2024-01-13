@@ -55,31 +55,49 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// add like to a particular post
+/**
+ * update 'like' of a post
+ * @param {*} alreadyLiked 
+ * @param {*} postId 
+ * @param {*} userId 
+ * @returns 
+ */
+const updateLikeStatus = async (alreadyLiked, postId, userId) => {
+  const updateOperator = alreadyLiked ? '$pull' : '$push';
+  const updatedPost = await Post.findByIdAndUpdate(
+    postId,
+    {
+      [updateOperator]: {
+        likes: userId,
+      },
+    },
+    { returnDocument: 'after' },
+  );
+  return { likeNumber: updatedPost.likes.length, isPushed: !alreadyLiked };
+};
+
+// add or remove 'like' of a post
 router.put('/:id/like', async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    // if the post does not have like
-    if (!post.likes.includes(req.body.userId)) {
-      await post.updateOne({
-        $push: {
-          likes: req.body.userId,
-        },
-      });
-      return res.status(200).json('Successfully put like on the post');
-    } else {
-      // if the post already has like
-      await post.updateOne({
-        $pull: {
-          likes: req.body.userId,
-        },
-      });
-      return res.status(403).json('Successfully removed like from post');
-    }
+    const alreadyLiked = post.likes.includes(req.body.userId);
+    const result = await updateLikeStatus(alreadyLiked, req.params.id, req.body.userId);
+    return res.status(200).json(result);
   } catch (err) {
     return res.status(500).json(err);
   }
 });
+
+// get 'like' status of a post
+router.get('/:id/like', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    const alreadyLiked = post.likes.includes(req.query.userId);
+    return res.status(200).json(alreadyLiked);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+})
 
 // get posts of timeline of profile page
 router.get('/profile/:username', async (req, res) => {
