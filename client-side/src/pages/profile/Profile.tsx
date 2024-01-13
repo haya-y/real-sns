@@ -18,6 +18,7 @@ export const Profile = () => {
       const fetchedUser = await fetchUserByName(username ?? '');
       setUser(fetchedUser);
     };
+    window.scrollTo(0, 0);
     fetchUser();
   }, [username]);
 
