@@ -56,3 +56,33 @@ export const createPost = async (newPost: CreatedPost): Promise<Post> => {
     throw error;
   }
 };
+
+/**
+ * プロフィールのタイムラインを取得
+ * @param username プロフィールのユーザーの名前
+ * @returns
+ */
+export const fetchProfileTimeLine = async (username: string): Promise<Post[]> => {
+  try {
+    const response = await axios.get(`/posts/profile/${username}`)
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+/**
+ * ホームのタイムラインを取得
+ * @param userId ログインしているユーザーのID
+ * @returns
+ */
+export const fetchHomeTimeLine = async (userId: string): Promise<Post[]> => {
+  try {
+    const response = await axios.get(`/posts/timeline/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

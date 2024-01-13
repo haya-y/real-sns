@@ -1,11 +1,11 @@
-import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
+import { fetchHomeTimeLine, fetchProfileTimeLine } from '../../api/post/PostApi';
+import { AuthContext } from '../../redux/AuthContext';
+import { Post as PostType } from '../../types/Post.types';
 import { Post } from '../post/Post';
 import { Share } from '../share/Share';
 import './TimeLine.styles';
 import { StyledTimeLineDiv } from './TimeLine.styles';
-import { Post as PostType } from '../../types/Post.types';
-import { AuthContext } from '../../redux/AuthContext';
 
 type Props = {
   username?: string;
@@ -20,10 +20,10 @@ export const TimeLine = ({ username }: Props) => {
   // TODO user?._id以外のuserのプロパティが変更された場合でも、↓が実行されるかを確認する
   useEffect(() => {
     const fetchUserPosts = async () => {
-      const response = username
-        ? await axios.get(`/posts/profile/${username}`) // プロフィールの場合
-        : await axios.get(`/posts/timeline/${user?._id}`); // ホームの場合
-      setPosts(response.data);
+      const fetchedPosts = username ? await fetchProfileTimeLine(username) : await fetchHomeTimeLine(user?._id ?? '');
+      setPosts(
+        fetchedPosts.sort((post1, post2) => new Date(post2.createdAt).getTime() - new Date(post1.createdAt).getTime()),
+      );
     };
     fetchUserPosts();
   }, [username, user?._id]);
