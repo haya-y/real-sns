@@ -59,6 +59,10 @@ export const StyledShareDiv = styled.div`
             font-size: 14px;
             font-weight: 550;
           }
+
+          #file {
+            display: none;
+          }
         }
       }
 
