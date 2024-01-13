@@ -10,7 +10,7 @@ type UpdatedLikes = {
 };
 
 /** 投稿ボックスから入力される値の型 */
-export type CreatedPost = Pick<Post, 'userId' | 'desc'>;
+export type CreatedPost = Pick<Post, 'userId' | 'desc' | 'img'>;
 
 /**
  * いいねの更新状態を取得
@@ -50,6 +50,36 @@ export const fetchLikes = async (postId: string, loginUserId: string): Promise<U
 export const createPost = async (newPost: CreatedPost): Promise<Post> => {
   try {
     const response = await axios.post('/posts', newPost);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+/**
+ * プロフィールのタイムラインを取得
+ * @param username プロフィールのユーザーの名前
+ * @returns
+ */
+export const fetchProfileTimeLine = async (username: string): Promise<Post[]> => {
+  try {
+    const response = await axios.get(`/posts/profile/${username}`)
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+/**
+ * ホームのタイムラインを取得
+ * @param userId ログインしているユーザーのID
+ * @returns
+ */
+export const fetchHomeTimeLine = async (userId: string): Promise<Post[]> => {
+  try {
+    const response = await axios.get(`/posts/timeline/${userId}`);
     return response.data;
   } catch (error) {
     console.error(error);

@@ -1,15 +1,17 @@
 import * as MUI from '@mui/icons-material';
-import React, { useCallback, useContext, useRef } from 'react';
+import React, { useCallback, useContext, useRef, useState } from 'react';
 import { CreatedPost, createPost } from '../../api/post/PostApi';
 import { PUBLIC_FOLDER } from '../../constants';
 import { AuthContext } from '../../redux/AuthContext';
 import { StyledShareDiv } from './Share.styles';
+import { uploadImage } from '../../api/upload/UploadApi';
 
 export const Share = () => {
   const postText = useRef<HTMLInputElement>(null);
   const {
     state: { user },
   } = useContext(AuthContext);
+  const [file, setFile] = useState<File | null>(null);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
@@ -17,23 +19,32 @@ export const Share = () => {
       const newPost: CreatedPost = {
         userId: user?._id ?? '',
         desc: postText.current?.value ?? '',
-        // img: 'sample.png',
+        img: '',
       };
+      if (file) {
+        await uploadImage(file, newPost);
+      }
       await createPost(newPost);
       if (postText.current) {
         postText.current.value = '';
       }
       window.location.reload();
     },
-    [user?._id],
+    [file, user?._id],
   );
+
+  const onChangeFile = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+    }
+  }, []);
 
   return (
     <StyledShareDiv>
       <div className='shareWrapper'>
         <div className='shareWrapper-top'>
           <img
-            src={(user && user.profilePicture) || PUBLIC_FOLDER + '/person/noAvatar.png'}
+            src={user?.profilePicture ? PUBLIC_FOLDER + user?.profilePicture : PUBLIC_FOLDER + '/person/noAvatar.png'}
             alt='profile'
             className='shareWrapper-top-profileImg'
           />
@@ -42,10 +53,11 @@ export const Share = () => {
         <hr className='shareWrapper-hr' />
         <form className='shareWrapper-buttons' onSubmit={(e) => handleSubmit(e)}>
           <div className='shareWrapper-buttons-options'>
-            <div className='shareWrapper-buttons-options-option'>
+            <label className='shareWrapper-buttons-options-option' htmlFor='file'>
               <MUI.Image className='shareWrapper-buttons-options-option-icon' htmlColor='blue' />
               <span className='shareWrapper-buttons-options-option-text'>写真</span>
-            </div>
+              <input type='file' id='file' accept='.png, .jpeg, .jpg' onChange={(e) => onChangeFile(e)} />
+            </label>
             <div className='shareWrapper-buttons-options-option'>
               <MUI.Gif className='shareWrapper-buttons-options-option-icon' htmlColor='hotpink' />
               <span className='shareWrapper-buttons-options-option-text'>GIF</span>

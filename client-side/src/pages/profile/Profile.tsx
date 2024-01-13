@@ -18,6 +18,7 @@ export const Profile = () => {
       const fetchedUser = await fetchUserByName(username ?? '');
       setUser(fetchedUser);
     };
+    window.scrollTo(0, 0);
     fetchUser();
   }, [username]);
 
@@ -30,12 +31,14 @@ export const Profile = () => {
           <div className='profile-right-top'>
             <div className='profile-right-top-cover'>
               <img
-                src={(user && user.profilePicture) || PUBLIC_FOLDER + '/post/4.jpeg'}
+                src={user?.coverPicture ? PUBLIC_FOLDER + user?.coverPicture : PUBLIC_FOLDER + '/event.jpeg'}
                 alt='background'
                 className='profile-right-top-cover-coverImg'
               />
               <img
-                src={(user && user.profilePicture) || PUBLIC_FOLDER + '/person/noAvatar.png'}
+                src={
+                  user?.profilePicture ? PUBLIC_FOLDER + user?.profilePicture : PUBLIC_FOLDER + '/person/noAvatar.png'
+                }
                 alt='profile'
                 className='profile-right-top-cover-userImg'
               />
