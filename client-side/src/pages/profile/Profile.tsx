@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchUserByName } from '../../api/user/PostUser';
+import { fetchUserByName } from '../../api/user/UserApi';
 import { Rightbar } from '../../components/rightbar/Rightbar';
 import { Sidebar } from '../../components/sidebar/Sidebar';
 import { TimeLine } from '../../components/timeline/TimeLine';

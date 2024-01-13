@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 // timeago.jsは、.envで「GENERATE_SOURCEMAP=false」を書けばWarningが消える
 import { format } from 'timeago.js';
 import { fetchLikeStatus, fetchLikes } from '../../api/post/PostApi';
-import { fetchUserById } from '../../api/user/PostUser';
+import { fetchUserById } from '../../api/user/UserApi';
 import { PUBLIC_FOLDER } from '../../constants';
 import { AuthContext } from '../../redux/AuthContext';
 import { Post as PostType } from '../../types/Post.types';
