@@ -1,32 +1,31 @@
 import * as MUI from '@mui/icons-material';
-import axios from 'axios';
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useRef } from 'react';
+import { CreatedPost, createPost } from '../../api/post/PostApi';
 import { PUBLIC_FOLDER } from '../../constants';
 import { AuthContext } from '../../redux/AuthContext';
 import { StyledShareDiv } from './Share.styles';
 
 export const Share = () => {
-  const [postText, setPostText] = useState('');
+  const postText = useRef<HTMLInputElement>(null);
   const {
     state: { user },
   } = useContext(AuthContext);
 
-  const onClickPostBtn = useCallback(async () => {
-    axios
-      .post('/posts', {
-        userId: '6304d19040d4092261cbeea3',
-        desc: postText,
-        img: 'sample.png',
-      })
-      .then(() => setPostText(''));
-  }, [postText]);
-
-  const onChangePostText = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setPostText(e.target.value);
-      console.log(postText);
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const newPost: CreatedPost = {
+        userId: user?._id ?? '',
+        desc: postText.current?.value ?? '',
+        // img: 'sample.png',
+      };
+      await createPost(newPost);
+      if (postText.current) {
+        postText.current.value = '';
+      }
+      window.location.reload();
     },
-    [postText],
+    [user?._id],
   );
 
   return (
@@ -38,15 +37,10 @@ export const Share = () => {
             alt='profile'
             className='shareWrapper-top-profileImg'
           />
-          <input
-            type='text'
-            className='shareWrapper-top-input'
-            placeholder='今何してるの？'
-            onChange={(e) => onChangePostText(e)}
-          />
+          <input type='text' className='shareWrapper-top-input' placeholder='今何してるの？' ref={postText} />
         </div>
         <hr className='shareWrapper-hr' />
-        <div className='shareWrapper-buttons'>
+        <form className='shareWrapper-buttons' onSubmit={(e) => handleSubmit(e)}>
           <div className='shareWrapper-buttons-options'>
             <div className='shareWrapper-buttons-options-option'>
               <MUI.Image className='shareWrapper-buttons-options-option-icon' htmlColor='blue' />
@@ -65,10 +59,10 @@ export const Share = () => {
               <span className='shareWrapper-buttons-options-option-text'>投票</span>
             </div>
           </div>
-          <button className='shareWrapper-buttons-postBtn' onClick={onClickPostBtn}>
+          <button className='shareWrapper-buttons-postBtn' type='submit'>
             投稿
           </button>
-        </div>
+        </form>
       </div>
     </StyledShareDiv>
   );

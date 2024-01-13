@@ -5,7 +5,6 @@ import { Share } from '../share/Share';
 import './TimeLine.styles';
 import { StyledTimeLineDiv } from './TimeLine.styles';
 import { Post as PostType } from '../../types/Post.types';
-// import { Posts } from '../../dummyData';
 import { AuthContext } from '../../redux/AuthContext';
 
 type Props = {
