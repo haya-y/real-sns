@@ -57,7 +57,11 @@ export const Post = ({ post: { _id: postId, likes, userId, desc, img, createdAt 
           <div className='postWrapper-top-left'>
             <Link to={`/profile/${user && user.username}`}>
               <img
-                src={(user && user.profilePicture) || PUBLIC_FOLDER + '/person/noAvatar.png'}
+                src={
+                  user?.profilePicture
+                    ? PUBLIC_FOLDER + (user?.profilePicture ?? '')
+                    : PUBLIC_FOLDER + '/person/noAvatar.png'
+                }
                 alt='post'
                 className='postWrapper-top-left-profileImg'
               />

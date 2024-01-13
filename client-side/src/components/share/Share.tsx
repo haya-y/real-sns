@@ -40,7 +40,7 @@ export const Share = () => {
       <div className='shareWrapper'>
         <div className='shareWrapper-top'>
           <img
-            src={(user && user.profilePicture) || PUBLIC_FOLDER + '/person/noAvatar.png'}
+            src={user?.profilePicture ? PUBLIC_FOLDER + user?.profilePicture : PUBLIC_FOLDER + '/person/noAvatar.png'}
             alt='profile'
             className='shareWrapper-top-profileImg'
           />
