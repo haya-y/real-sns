@@ -1,10 +1,14 @@
-import { createContext, ReactNode, useReducer } from 'react';
+import { createContext, ReactNode, useEffect, useReducer } from 'react';
+import { User } from '../types/User.types';
 import { AuthReducer } from './reducers/AuthReducer';
 import { AuthContextType, AuthState } from './types/AuthTypes';
-import { User } from '../types/User.types';
 
 /** 開発中であればtrue */
-const isDev = true;
+const isDev = false;
+if (isDev) {
+  console.warn('ログインのユーザー情報でダミーデータが使われています。');
+}
+
 const sampleUser: User = {
   _id: '630cab2bd25fba38373c5d63',
   username: 'tanaka',
@@ -22,7 +26,7 @@ const sampleUser: User = {
 };
 
 const initialState: AuthState = {
-  user: !isDev ? null : sampleUser,
+  user: isDev ? sampleUser : JSON.parse(localStorage.getItem('user') ?? '') || null,
   isFetching: false,
   error: false,
 };
@@ -35,6 +39,10 @@ type Props = {
 
 export const AuthContextProvider = ({ children }: Props) => {
   const [state, dispatch] = useReducer(AuthReducer, initialState);
+
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(state.user));
+  }, [state.user]);
 
   return (
     <AuthContext.Provider
