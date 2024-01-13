@@ -10,7 +10,7 @@ type UpdatedLikes = {
 };
 
 /** 投稿ボックスから入力される値の型 */
-export type CreatedPost = Pick<Post, 'userId' | 'desc'>;
+export type CreatedPost = Pick<Post, 'userId' | 'desc' | 'img'>;
 
 /**
  * いいねの更新状態を取得

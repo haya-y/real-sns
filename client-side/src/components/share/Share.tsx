@@ -4,6 +4,7 @@ import { CreatedPost, createPost } from '../../api/post/PostApi';
 import { PUBLIC_FOLDER } from '../../constants';
 import { AuthContext } from '../../redux/AuthContext';
 import { StyledShareDiv } from './Share.styles';
+import { uploadImage } from '../../api/upload/UploadApi';
 
 export const Share = () => {
   const postText = useRef<HTMLInputElement>(null);
@@ -18,15 +19,18 @@ export const Share = () => {
       const newPost: CreatedPost = {
         userId: user?._id ?? '',
         desc: postText.current?.value ?? '',
-        // img: 'sample.png',
+        img: '',
       };
+      if (file) {
+        await uploadImage(file, newPost);
+      }
       await createPost(newPost);
       if (postText.current) {
         postText.current.value = '';
       }
       window.location.reload();
     },
-    [user?._id],
+    [file, user?._id],
   );
 
   const onChangeFile = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
