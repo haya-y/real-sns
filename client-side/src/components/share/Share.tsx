@@ -1,15 +1,15 @@
 import * as MUI from '@mui/icons-material';
 import axios from 'axios';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { PUBLIC_FOLDER } from '../../constants';
+import { AuthContext } from '../../redux/AuthContext';
 import { StyledShareDiv } from './Share.styles';
 
-type Props = {
-  username?: any;
-};
-
-export const Share = ({ username }: Props) => {
+export const Share = () => {
   const [postText, setPostText] = useState('');
+  const {
+    state: { user },
+  } = useContext(AuthContext);
 
   const onClickPostBtn = useCallback(async () => {
     axios
@@ -33,7 +33,11 @@ export const Share = ({ username }: Props) => {
     <StyledShareDiv>
       <div className='shareWrapper'>
         <div className='shareWrapper-top'>
-          <img src={PUBLIC_FOLDER + '/person/noAvatar.png'} alt='' className='shareWrapper-top-profileImg' />
+          <img
+            src={(user && user.profilePicture) || PUBLIC_FOLDER + '/person/noAvatar.png'}
+            alt='profile'
+            className='shareWrapper-top-profileImg'
+          />
           <input
             type='text'
             className='shareWrapper-top-input'
