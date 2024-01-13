@@ -5,14 +5,12 @@ import { Rightbar } from '../../components/rightbar/Rightbar';
 import { Sidebar } from '../../components/sidebar/Sidebar';
 import { TimeLine } from '../../components/timeline/TimeLine';
 import { Topbar } from '../../components/topbar/Topbar';
-// import { Users } from '../../dummyData';
+import { PUBLIC_FOLDER } from '../../constants';
 import { User } from '../../types/User.types';
 import { StyledProfileDiv } from './Profile.styles';
-import { PUBLIC_FOLDER } from '../../constants';
 
 export const Profile = () => {
   const [user, setUser] = useState<User>();
-  // const [user, setUser] = useState<User | null>(Users[0]); // ダミー用
   const username = useParams().username;
 
   useEffect(() => {
@@ -21,10 +19,7 @@ export const Profile = () => {
       setUser(response.data);
     };
     fetchUser();
-    // eslint-disable-next-line
-  }, []);
-
-  console.log({ user });
+  }, [username]);
 
   return (
     <StyledProfileDiv>
