@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { fetchUserByName } from '../../api/user/PostUser';
 import { Rightbar } from '../../components/rightbar/Rightbar';
 import { Sidebar } from '../../components/sidebar/Sidebar';
 import { TimeLine } from '../../components/timeline/TimeLine';
@@ -15,8 +15,8 @@ export const Profile = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await axios.get(`/users/?username=${username}`);
-      setUser(response.data);
+      const fetchedUser = await fetchUserByName(username ?? '');
+      setUser(fetchedUser);
     };
     fetchUser();
   }, [username]);
