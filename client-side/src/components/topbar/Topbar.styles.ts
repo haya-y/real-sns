@@ -84,13 +84,40 @@ export const StyledTopbarDiv = styled.div`
           font-size: 12px;
         }
 
-        img {
+        &-profile {
           width: 32px;
           height: 32px;
           border-radius: 50%;
           cursor: pointer;
           object-fit: cover;
         }
+      }
+    }
+  }
+
+  .topbarRightEnd {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 25px;
+
+    &-logoutBtn {
+      width: 90px;
+      height: 30px;
+      background-color: #d40202;
+      color: #f5f5f5;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ab0202;
+      }
+
+      &:active {
+        background-color: #a10202;
       }
     }
   }
