@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { PUBLIC_FOLDER } from '../../constants';
 import { StyledProfileRightbarDiv } from './ProfileRightbar.styles';
 
-export const ProfileRightbar = () => {
+export const ProfileRightbar = memo(() => {
   return (
     <StyledProfileRightbarDiv>
       <h4 className='rightbarUserTitle'>ユーザー情報</h4>
@@ -38,4 +39,4 @@ export const ProfileRightbar = () => {
       </div>
     </StyledProfileRightbarDiv>
   );
-};
+});

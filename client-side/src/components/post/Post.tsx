@@ -1,5 +1,5 @@
 import { MoreVert as MUIMoreVert } from '@mui/icons-material';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // timeago.jsは、.envで「GENERATE_SOURCEMAP=false」を書けばWarningが消える
 import { format } from 'timeago.js';
@@ -15,7 +15,7 @@ type Props = {
   post: PostType;
 };
 
-export const Post = ({ post: { _id: postId, likes, userId, desc, img, createdAt } }: Props) => {
+export const Post = memo(({ post: { _id: postId, likes, userId, desc, img, createdAt } }: Props) => {
   /** 投稿のいいね数 */
   const [likeNumber, setLikeNumber] = useState(likes.length);
   /** 既にいいねしたかどうか */
@@ -94,4 +94,4 @@ export const Post = ({ post: { _id: postId, likes, userId, desc, img, createdAt 
       </div>
     </StyledPostDiv>
   );
-};
+});
