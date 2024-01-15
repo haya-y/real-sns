@@ -2,11 +2,13 @@ import React, { useCallback, useContext, useRef } from 'react';
 import { loginCall } from '../../ActionCalls';
 import { AuthContext } from '../../redux/AuthContext';
 import { StyledLoginDiv } from './Login.styles';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
   const email = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
   const { dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,6 +23,11 @@ export const Login = () => {
     },
     [dispatch],
   );
+
+  const switchRegisterPage = useCallback(() => {
+    navigate('/register');
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <StyledLoginDiv>
@@ -49,7 +56,9 @@ export const Login = () => {
             />
             <button className='loginWrapper-right-box-loginButton'>ログイン</button>
             <span className='loginWrapper-right-box-loginForgot'>パスワードを忘れた方へ</span>
-            <button className='loginWrapper-right-box-registerButton'>アカウント作成</button>
+            <button className='loginWrapper-right-box-registerButton' onClick={switchRegisterPage}>
+              新規登録はこちら
+            </button>
           </form>
         </div>
       </div>

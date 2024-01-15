@@ -34,7 +34,7 @@ export const StyledRegisterDiv = styled.div`
 
       /* registerWrapper-right */
       &-box {
-        height: 400px;
+        height: 450px;
         padding: 20px;
         background-color: white;
         border-radius: 10px;
@@ -73,6 +73,7 @@ export const StyledRegisterDiv = styled.div`
           font-size: 20px;
           font-weight: 500;
           cursor: pointer;
+          margin-bottom: 30px;
         }
 
         &-loginButton {
@@ -86,7 +87,6 @@ export const StyledRegisterDiv = styled.div`
           font-size: 20px;
           font-weight: 500;
           cursor: pointer;
-          margin-top: 15px;
         }
       }
     }
