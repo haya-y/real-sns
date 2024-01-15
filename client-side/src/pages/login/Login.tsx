@@ -26,6 +26,7 @@ export const Login = () => {
 
   const switchRegisterPage = useCallback(() => {
     navigate('/register');
+    // eslint-disable-next-line
   }, []);
 
   return (

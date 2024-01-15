@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { useCallback, useContext, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../redux/AuthContext';
 import { LOGIN } from '../../redux/types/AuthTypes';
 import { StyledRegisterDiv } from './Register.styles';
-import { Link, useNavigate } from 'react-router-dom';
 
 export const Register = () => {
   const username = useRef<HTMLInputElement>(null);
@@ -39,6 +39,7 @@ export const Register = () => {
 
   const switchLoginPage = useCallback(() => {
     navigate('/login');
+    // eslint-disable-next-line
   }, []);
 
   return (
