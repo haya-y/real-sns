@@ -77,7 +77,7 @@ export const Post = memo(({ post: { _id: postId, likes, userId, desc, img, creat
         </div>
         <div className='postWrapper-center'>
           <span className='postWrapper-center-text'>{desc}</span>
-          <img src={PUBLIC_FOLDER + img} alt='' className='postWrapper-center-img' />
+          {img && <img src={PUBLIC_FOLDER + img} alt='user post img' className='postWrapper-center-img' />}
         </div>
         <div className='postWrapper-bottom' onClick={() => handleLike()}>
           <div className='postWrapper-bottom-left'>
