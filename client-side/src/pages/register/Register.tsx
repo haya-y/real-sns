@@ -3,6 +3,7 @@ import React, { useCallback, useContext, useRef } from 'react';
 import { AuthContext } from '../../redux/AuthContext';
 import { LOGIN } from '../../redux/types/AuthTypes';
 import { StyledRegisterDiv } from './Register.styles';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Register = () => {
   const username = useRef<HTMLInputElement>(null);
@@ -10,7 +11,7 @@ export const Register = () => {
   const password = useRef<HTMLInputElement>(null);
   const passwordConfirmation = useRef<HTMLInputElement>(null);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { dispatch } = useContext(AuthContext);
 
@@ -34,6 +35,10 @@ export const Register = () => {
       }
     }
     // eslint-disable-next-line
+  }, []);
+
+  const switchLoginPage = useCallback(() => {
+    navigate('/login');
   }, []);
 
   return (
@@ -77,9 +82,11 @@ export const Register = () => {
               ref={passwordConfirmation}
             />
             <button className='registerWrapper-right-box-signUpButton' type='submit'>
-              サインアップ
+              新規登録
             </button>
-            <button className='registerWrapper-right-box-loginButton'>ログイン</button>
+            <button className='registerWrapper-right-box-loginButton' onClick={switchLoginPage}>
+              ログインはこちら
+            </button>
           </form>
         </div>
       </div>
