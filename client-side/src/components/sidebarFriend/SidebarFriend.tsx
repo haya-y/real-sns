@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { PUBLIC_FOLDER } from '../../constants';
 import { User } from '../../types/User.types';
@@ -7,7 +8,7 @@ type Props = {
   user: User;
 };
 
-export const SidebarFriend = ({ user: { profilePicture, username } }: Props) => {
+export const SidebarFriend = memo(({ user: { profilePicture, username } }: Props) => {
   return (
     <StyledSidebarFriendLi>
       <Link className='sidebarFriend-link' to={`/profile/${username}`}>
@@ -16,4 +17,4 @@ export const SidebarFriend = ({ user: { profilePicture, username } }: Props) => 
       </Link>
     </StyledSidebarFriendLi>
   );
-};
+});

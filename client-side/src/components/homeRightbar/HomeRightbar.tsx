@@ -1,9 +1,10 @@
+import { memo } from 'react';
 import { PUBLIC_FOLDER } from '../../constants';
 import { Users } from '../../dummyData';
 import { Online } from '../online/Online';
 import { StyledHomeRightbarDiv } from './HomeRightbar.styles';
 
-export const HomeRightbar = () => {
+export const HomeRightbar = memo(() => {
   return (
     <StyledHomeRightbarDiv>
       <div className='homeRightbarWrapper'>
@@ -42,4 +43,4 @@ export const HomeRightbar = () => {
       </div>
     </StyledHomeRightbarDiv>
   );
-};
+});
