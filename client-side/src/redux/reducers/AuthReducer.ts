@@ -1,4 +1,4 @@
-import { AuthAction, AuthState, LOGIN } from '../types/AuthTypes';
+import { AuthAction, AuthState, LOGIN, LOGOUT } from '../types/AuthTypes';
 
 export const AuthReducer = (state: AuthState, action: AuthAction) => {
   switch (action.type) {
@@ -19,6 +19,12 @@ export const AuthReducer = (state: AuthState, action: AuthAction) => {
         user: null,
         isFetching: false,
         error: action.payload,
+      };
+    case LOGOUT:
+      return {
+        user: null,
+        isFetching: false,
+        error: false,
       };
     default:
       return state;

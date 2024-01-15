@@ -1,14 +1,24 @@
 import * as MUI from '@mui/icons-material';
-import { memo, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { memo, useCallback, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { PUBLIC_FOLDER } from '../../constants';
 import { AuthContext } from '../../redux/AuthContext';
 import { StyledTopbarDiv } from './Topbar.styles';
+import { LOGOUT } from '../../redux/types/AuthTypes';
 
 export const Topbar = memo(() => {
   const {
     state: { user },
+    dispatch,
   } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = useCallback(() => {
+    localStorage.clear();
+    dispatch({ type: LOGOUT });
+    navigate('/login');
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <StyledTopbarDiv>
@@ -36,6 +46,7 @@ export const Topbar = memo(() => {
           <div className='topbarRight-icons-items'>
             <Link to={`/profile/${user?.username}`}>
               <img
+                className='topbarRight-icons-items-profile'
                 src={
                   user?.profilePicture ? PUBLIC_FOLDER + user?.profilePicture : PUBLIC_FOLDER + '/person/noAvatar.png'
                 }
@@ -44,6 +55,11 @@ export const Topbar = memo(() => {
             </Link>
           </div>
         </div>
+      </div>
+      <div className='topbarRightEnd'>
+        <button className='topbarRightEnd-logoutBtn' onClick={handleLogout}>
+          ログアウト
+        </button>
       </div>
     </StyledTopbarDiv>
   );
