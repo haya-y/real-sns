@@ -36,6 +36,7 @@ export const StyledPostDiv = styled.div`
       }
 
       &-right {
+        cursor: pointer;
       }
     }
 

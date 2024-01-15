@@ -69,9 +69,11 @@ export const Post = memo(({ post: { _id: postId, likes, userId, desc, img, creat
             <span className='postWrapper-top-left-userName'>{user && user.username}</span>
             <span className='postWrapper-top-left-date'>{format(createdAt)}</span>
           </div>
-          <div className='postWrapper-top-right'>
-            <MUIMoreVert />
-          </div>
+          {userId === loginUser?._id && (
+            <div className='postWrapper-top-right'>
+              <MUIMoreVert />
+            </div>
+          )}
         </div>
         <div className='postWrapper-center'>
           <span className='postWrapper-center-text'>{desc}</span>
