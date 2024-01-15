@@ -1,12 +1,12 @@
 import * as MUI from '@mui/icons-material';
-import React, { useCallback, useContext, useRef, useState } from 'react';
+import React, { memo, useCallback, useContext, useRef, useState } from 'react';
 import { CreatedPost, createPost } from '../../api/post/PostApi';
+import { uploadImage } from '../../api/upload/UploadApi';
 import { PUBLIC_FOLDER } from '../../constants';
 import { AuthContext } from '../../redux/AuthContext';
 import { StyledShareDiv } from './Share.styles';
-import { uploadImage } from '../../api/upload/UploadApi';
 
-export const Share = () => {
+export const Share = memo(() => {
   const postText = useRef<HTMLInputElement>(null);
   const {
     state: { user },
@@ -78,4 +78,4 @@ export const Share = () => {
       </div>
     </StyledShareDiv>
   );
-};
+});
