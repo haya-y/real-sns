@@ -26,7 +26,7 @@ const sampleUser: User = {
 };
 
 const initialState: AuthState = {
-  user: isDev ? sampleUser : JSON.parse(localStorage.getItem('user') ?? '') || null,
+  user: isDev ? sampleUser : JSON.parse(localStorage.getItem('user')!),
   isFetching: false,
   error: false,
 };

@@ -7,12 +7,15 @@ export enum LOGIN {
   ERROR = 'LOGIN_ERROR',
 }
 
-/** LOGINの3つの定数の型 */
-type LoginType = LOGIN.START | LOGIN.SUCCESS | LOGIN.ERROR;
+export const LOGOUT = 'LOGOUT';
+type Logout = typeof LOGOUT;
+
+/** 認証時の定数の型 */
+type AuthType = LOGIN.START | LOGIN.SUCCESS | LOGIN.ERROR | Logout;
 
 /** dispatchの引数に入れるactionの型 */
 export type AuthAction = {
-  type: LoginType;
+  type: AuthType;
   payload?: User | any;
 };
 

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useCallback, useContext, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../redux/AuthContext';
 import { LOGIN } from '../../redux/types/AuthTypes';
 import { StyledRegisterDiv } from './Register.styles';
@@ -10,7 +11,7 @@ export const Register = () => {
   const password = useRef<HTMLInputElement>(null);
   const passwordConfirmation = useRef<HTMLInputElement>(null);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { dispatch } = useContext(AuthContext);
 
@@ -33,6 +34,11 @@ export const Register = () => {
         console.log(err);
       }
     }
+    // eslint-disable-next-line
+  }, []);
+
+  const switchLoginPage = useCallback(() => {
+    navigate('/login');
     // eslint-disable-next-line
   }, []);
 
@@ -77,9 +83,11 @@ export const Register = () => {
               ref={passwordConfirmation}
             />
             <button className='registerWrapper-right-box-signUpButton' type='submit'>
-              サインアップ
+              新規登録
             </button>
-            <button className='registerWrapper-right-box-loginButton'>ログイン</button>
+            <button className='registerWrapper-right-box-loginButton' onClick={switchLoginPage}>
+              ログインはこちら
+            </button>
           </form>
         </div>
       </div>
