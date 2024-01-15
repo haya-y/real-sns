@@ -14,7 +14,7 @@ export const HomeRightbar = memo(() => {
             <b>フォロワー限定</b>イベント開催中！
           </span>
         </div>
-        <img src='assets/event.jpeg' alt='' className='homeRightbarWrapper-eventImg' />
+        <img src={PUBLIC_FOLDER + '/event.jpeg'} alt='' className='homeRightbarWrapper-eventImg' />
         <h4 className='homeRightbarWrapper-title'>オンラインの友達</h4>
         <ul className='homeRightbarWrapper-friendList'>
           {Users.map((user) => (
