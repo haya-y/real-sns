@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import { fetchHomeTimeLine, fetchProfileTimeLine } from '../../api/post/PostApi';
 import { AuthContext } from '../../redux/AuthContext';
 import { Post as PostType } from '../../types/Post.types';
@@ -11,7 +11,7 @@ type Props = {
   username?: string;
 };
 
-export const TimeLine = ({ username }: Props) => {
+export const TimeLine = memo(({ username }: Props) => {
   const [posts, setPosts] = useState<PostType[]>([]);
   const {
     state: { user },
@@ -38,4 +38,4 @@ export const TimeLine = ({ username }: Props) => {
       </div>
     </StyledTimeLineDiv>
   );
-};
+});

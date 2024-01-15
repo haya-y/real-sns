@@ -1,11 +1,11 @@
 import * as MUI from '@mui/icons-material';
+import { memo, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { StyledTopbarDiv } from './Topbar.styles';
-import { useContext } from 'react';
-import { AuthContext } from '../../redux/AuthContext';
 import { PUBLIC_FOLDER } from '../../constants';
+import { AuthContext } from '../../redux/AuthContext';
+import { StyledTopbarDiv } from './Topbar.styles';
 
-export const Topbar = () => {
+export const Topbar = memo(() => {
   const {
     state: { user },
   } = useContext(AuthContext);
@@ -47,4 +47,4 @@ export const Topbar = () => {
       </div>
     </StyledTopbarDiv>
   );
-};
+});

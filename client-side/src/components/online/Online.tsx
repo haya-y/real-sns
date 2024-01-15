@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { PUBLIC_FOLDER } from '../../constants/index';
 import { User } from '../../types/User.types';
 import { StyledOnlineDiv } from './Online.styles';
@@ -6,7 +7,7 @@ type Props = {
   user: User;
 };
 
-export const Online = ({ user: { profilePicture, username } }: Props) => {
+export const Online = memo(({ user: { profilePicture, username } }: Props) => {
   return (
     <StyledOnlineDiv>
       <li className='rightbarFriend'>
@@ -18,4 +19,4 @@ export const Online = ({ user: { profilePicture, username } }: Props) => {
       </li>
     </StyledOnlineDiv>
   );
-};
+});

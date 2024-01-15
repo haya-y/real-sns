@@ -1,5 +1,5 @@
 import * as MUI from '@mui/icons-material';
-import { useContext, useMemo } from 'react';
+import { memo, useContext, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Users } from '../../dummyData';
 import { AuthContext } from '../../redux/AuthContext';
@@ -8,7 +8,7 @@ import { StyledSidebarDiv } from './Sidebar.styles';
 
 const muiClassName = 'sidebarWrapper-list-link-item-icon';
 
-export const Sidebar = () => {
+export const Sidebar = memo(() => {
   const {
     state: { user },
   } = useContext(AuthContext);
@@ -53,4 +53,4 @@ export const Sidebar = () => {
       </div>
     </StyledSidebarDiv>
   );
-};
+});
