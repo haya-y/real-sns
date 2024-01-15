@@ -1,3 +1,4 @@
+import { baseURL } from './../../constants/index';
 import axios from 'axios';
 import { CreatedPost } from '../post/PostApi';
 
@@ -13,7 +14,7 @@ export const uploadImage = async (file: File, newPost: CreatedPost): Promise<str
   data.append('file', file);
   newPost.img = fileName;
   try {
-    const response = await axios.post('/upload', data);
+    const response = await axios.post(`${baseURL}/upload`, data);
     return response.data;
   } catch (error) {
     console.error(error);
