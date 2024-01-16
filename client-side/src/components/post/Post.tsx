@@ -3,7 +3,7 @@ import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 // timeago.jsは、.envで「GENERATE_SOURCEMAP=false」を書けばWarningが消える
 import { format } from 'timeago.js';
-import { fetchLikeStatus, fetchLikes } from '../../api/post/PostApi';
+import { fetchLikeStatus, updateLike } from '../../api/post/PostApi';
 import { fetchUserById } from '../../api/user/UserApi';
 import { PUBLIC_FOLDER } from '../../constants';
 import { AuthContext } from '../../redux/AuthContext';
@@ -45,7 +45,7 @@ export const Post = memo(({ post: { _id: postId, likes, userId, desc, img, creat
 
   /** いいねの操作 */
   const handleLike = useCallback(async () => {
-    const { likeNumber, isPushed } = await fetchLikes(postId, loginUser?._id ?? '');
+    const { likeNumber, isPushed } = await updateLike(postId, loginUser?._id ?? '');
     setLikeNumber(likeNumber);
     setPushLike(isPushed);
   }, [postId, loginUser]);
