@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { useCallback, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { RegisterCredentials, registerNewUser } from '../../api/auth/AuthApi';
 import { AuthContext } from '../../redux/AuthContext';
 import { LOGIN } from '../../redux/types/AuthTypes';
 import { StyledRegisterDiv } from './Register.styles';
@@ -22,16 +22,16 @@ export const Register = () => {
       passwordConfirmation.current?.setCustomValidity('パスワードが一致していません。');
     } else {
       try {
-        const user = {
-          username: username.current?.value,
-          email: email.current?.value,
-          password: password.current?.value,
+        const registeredInfo: RegisterCredentials = {
+          username: username.current?.value ?? '',
+          email: email.current?.value ?? '',
+          password: password.current?.value ?? '',
         };
-        const response = await axios.post('/auth/register', user);
-        dispatch({ type: LOGIN.SUCCESS, payload: response.data });
-        // navigate('/login');
+        const user = await registerNewUser(registeredInfo);
+        dispatch({ type: LOGIN.SUCCESS, payload: user });
+        // navigate('/login'); // 新規登録後にログイン画面に遷移する場合は必要
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
     // eslint-disable-next-line
