@@ -33,7 +33,7 @@ export const fetchLikeStatus = async (postId: string, loginUserId: string): Prom
  * @param postId
  * @param loginUserId
  */
-export const fetchLikes = async (postId: string, loginUserId: string): Promise<UpdatedLikes> => {
+export const updateLike = async (postId: string, loginUserId: string): Promise<UpdatedLikes> => {
   try {
     const response = await axios.put(`${baseURL}/posts/${postId}/like`, { userId: loginUserId });
     return response.data;
