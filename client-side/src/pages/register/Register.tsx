@@ -31,7 +31,7 @@ export const Register = () => {
         dispatch({ type: LOGIN.SUCCESS, payload: response.data });
         // navigate('/login');
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
     // eslint-disable-next-line
