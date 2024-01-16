@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../redux/AuthContext';
 import { LOGIN } from '../../redux/types/AuthTypes';
 import { StyledRegisterDiv } from './Register.styles';
+import { baseURL } from '../../constants';
 
 export const Register = () => {
   const username = useRef<HTMLInputElement>(null);
@@ -27,7 +28,7 @@ export const Register = () => {
           email: email.current?.value,
           password: password.current?.value,
         };
-        const response = await axios.post('/auth/register', user);
+        const response = await axios.post(`${baseURL}/auth/register`, user);
         dispatch({ type: LOGIN.SUCCESS, payload: response.data });
         // navigate('/login');
       } catch (err) {
