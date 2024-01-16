@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Post } from '../../types/Post.types';
+import { baseURL } from '../../constants';
 
 /** いいね更新後の返却値の型 */
 type UpdatedLikes = {
@@ -19,7 +20,7 @@ export type CreatedPost = Pick<Post, 'userId' | 'desc' | 'img'>;
  */
 export const fetchLikeStatus = async (postId: string, loginUserId: string): Promise<boolean> => {
   try {
-    const response = await axios.get(`/posts/${postId}/like/?userId=${loginUserId}`);
+    const response = await axios.get(`${baseURL}/posts/${postId}/like/?userId=${loginUserId}`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -34,7 +35,7 @@ export const fetchLikeStatus = async (postId: string, loginUserId: string): Prom
  */
 export const fetchLikes = async (postId: string, loginUserId: string): Promise<UpdatedLikes> => {
   try {
-    const response = await axios.put(`/posts/${postId}/like`, { userId: loginUserId });
+    const response = await axios.put(`${baseURL}/posts/${postId}/like`, { userId: loginUserId });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -49,7 +50,7 @@ export const fetchLikes = async (postId: string, loginUserId: string): Promise<U
  */
 export const createPost = async (newPost: CreatedPost): Promise<Post> => {
   try {
-    const response = await axios.post('/posts', newPost);
+    const response = await axios.post(`${baseURL}/posts`, newPost);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -64,7 +65,7 @@ export const createPost = async (newPost: CreatedPost): Promise<Post> => {
  */
 export const fetchProfileTimeLine = async (username: string): Promise<Post[]> => {
   try {
-    const response = await axios.get(`/posts/profile/${username}`)
+    const response = await axios.get(`${baseURL}/posts/profile/${username}`);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -79,7 +80,7 @@ export const fetchProfileTimeLine = async (username: string): Promise<Post[]> =>
  */
 export const fetchHomeTimeLine = async (userId: string): Promise<Post[]> => {
   try {
-    const response = await axios.get(`/posts/timeline/${userId}`);
+    const response = await axios.get(`${baseURL}/posts/timeline/${userId}`);
     return response.data;
   } catch (error) {
     console.error(error);

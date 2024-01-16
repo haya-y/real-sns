@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Navigate, Route, BrowserRouter, Routes } from 'react-router-dom';
+import { useContext } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Home } from './pages/home/Home';
 import { Login } from './pages/login/Login';
 import { Profile } from './pages/profile/Profile';
@@ -10,6 +10,7 @@ export const App = () => {
   const {
     state: { user },
   } = useContext(AuthContext);
+
   return (
     <BrowserRouter>
       <Routes>
