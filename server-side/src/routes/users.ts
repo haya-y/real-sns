@@ -37,7 +37,7 @@ router.delete('/:id', async (req, res) => {
 
 // get user information with query parameter
 router.get('/', async (req, res) => {
-  const userId = req.query.userId;
+  const userId = req.query.userId; 
   const username = req.query.username;
   try {
     const user = userId ? await User.findById(userId) : await User.findOne({ username });

@@ -2,7 +2,7 @@
   "name": "real-sns",
   "version": "1.0.0",
   "description": "real-sns",
-  "main": "server.js",
+  "main": "dist/server.js",
   "scripts": {
     "start": "nodemon dist/server.js"
   },

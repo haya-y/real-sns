@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 /** MongoDBのURL */
 export const MONGO_URL = process.env.MONGO_URL || '';
 

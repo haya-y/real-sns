@@ -1,17 +1,15 @@
+import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import path from 'path';
-import cors from 'cors';
-
-import userRoute from './routes/users';
+import { DEV_CLIENT_SIDE_BASE_URL, MONGO_URL, PROD_CLIENT_SIDE_BASE_URL } from './constants';
 import authRoutes from './routes/auth';
 import postRoute from './routes/posts';
 import uploadRoute from './routes/upload';
-import { DEV_CLIENT_SIDE_BASE_URL, MONGO_URL, PROD_CLIENT_SIDE_BASE_URL } from './constants';
+import userRoute from './routes/users';
 
 const app = express();
 const PORT = 4000;
-require('dotenv').config();
 
 // Connect database
 mongoose
@@ -39,7 +37,7 @@ app.use('/api/posts', postRoute);
 app.use('/api/upload', uploadRoute);
 
 app.get('/', (req, res) => {
-  res.send('hello world');
+  res.send('Real-SNS Backend');
 });
 
 app.listen(PORT, () => console.log('server running'));
