@@ -1,9 +1,6 @@
 import { Router } from 'express';
 import Post from '../models/Post';
 import User from '../models/User';
-// const router = require('express').Router();
-// const Post = require('../models/Post');
-// const User = require('../models/User');
 
 const router = Router();
 
@@ -153,5 +150,4 @@ router.get('/timeline/:userId', async (req, res) => {
   }
 });
 
-// module.exports = router;
 export default router;
