@@ -2,9 +2,10 @@
   "name": "real-sns",
   "version": "1.0.0",
   "description": "real-sns",
-  "main": "dist/server.js",
+  "main": "dist/bundle.js",
   "scripts": {
-    "start": "nodemon dist/server.js"
+    "start": "nodemon dist/bundle.js",
+    "watch": "webpack --watch --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,13 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/multer": "^1.4.11",
-    "@types/node": "^20.11.5"
+    "@types/node": "^20.11.5",
+    "@types/webpack": "^5.28.5",
+    "@types/webpack-node-externals": "^3.0.4",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
   }
 }
