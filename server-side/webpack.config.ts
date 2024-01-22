@@ -1,8 +1,8 @@
-// const webpack = require('webpack');
-const path = require('path');
-const nodeExternals = require('webpack-node-externals');
+import path from 'path';
+import webpack from 'webpack';
+import nodeExternals from 'webpack-node-externals';
 
-module.exports = {
+const config: webpack.Configuration = {
   mode: 'development',
   entry: './src/server.ts',
   externalsPresets: { node: true },
@@ -12,15 +12,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
-  // devServer: {
-  //   port: 4000,
-  //   historyApiFallback: true,
-  //   static: {
-  //     directory: path.resolve(__dirname, 'dist'),
-  //     publicPath: '/',
-  //     watch: true,
-  //   },
-  // },
   module: {
     rules: [
       {
@@ -34,8 +25,6 @@ module.exports = {
     extensions: ['.ts', '.js'],
   },
   target: 'node',
-  // node: {
-  //   __dirname: false,
-  //   __filename: false,
-  // },
 };
+
+export default config;
