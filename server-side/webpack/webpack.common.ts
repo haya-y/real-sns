@@ -3,13 +3,13 @@ import webpack from 'webpack';
 import nodeExternals from 'webpack-node-externals';
 
 const config: webpack.Configuration = {
-  mode: 'development',
+  // mode: 'development',
   entry: './src/server.ts',
   externalsPresets: { node: true },
   externals: [nodeExternals()],
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
   },
   module: {
