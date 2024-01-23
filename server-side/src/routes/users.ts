@@ -1,5 +1,7 @@
-const router = require('express').Router();
-const User = require('../models/User');
+import { Router } from 'express';
+import User from '../models/User';
+
+const router = Router();
 
 // Update user information
 router.put('/:id', async (req, res) => {
@@ -37,7 +39,12 @@ router.get('/', async (req, res) => {
   const username = req.query.username;
   try {
     const user = userId ? await User.findById(userId) : await User.findOne({ username });
-    const { password, updatedAt, ...other } = user._doc;
+    if (user === null) {
+      return res.status(404).json('指定したユーザーが見つかりませんでした');
+    }
+    // TODO user._docとなっていた書き方を見直し
+    // const { password, updatedAt, ...other } = user._doc;
+    const { password, ...other } = user;
     return res.status(200).json(other);
   } catch (err) {
     return res.status(500).json(err);
@@ -50,6 +57,9 @@ router.put('/:id/follow', async (req, res) => {
     try {
       const targetUser = await User.findById(req.params.id);
       const sourceUser = await User.findById(req.body.userId);
+      if (targetUser === null || sourceUser === null) {
+        return res.status(404).json('指定したユーザーが見つかりませんでした');
+      }
       if (!targetUser.followers.includes(req.body.userId)) {
         await targetUser.updateOne({
           $push: {
@@ -79,6 +89,9 @@ router.put('/:id/unfollow', async (req, res) => {
     try {
       const targetUser = await User.findById(req.params.id);
       const sourceUser = await User.findById(req.body.userId);
+      if (targetUser === null || sourceUser === null) {
+        return res.status(404).json('指定したユーザーが見つかりませんでした');
+      }
       if (targetUser.followers.includes(req.body.userId)) {
         await targetUser.updateOne({
           $pull: {
@@ -102,4 +115,4 @@ router.put('/:id/unfollow', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
