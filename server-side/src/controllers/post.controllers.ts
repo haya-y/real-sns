@@ -1,9 +1,10 @@
 import { RequestHandler } from 'express';
-import { PostModel, PostSchema } from '../models/Post';
+import { PostModel } from '../models/Post';
+import { CreateOrUpdatePostRequestBody, DeletePostRequestBody, PostPathParams } from '../types/post.types';
 
-export const createPost: RequestHandler = async (req, res) => {
+export const createPost: RequestHandler<any, any, CreateOrUpdatePostRequestBody> = async (req, res) => {
   try {
-    const requestBody: Required<Pick<PostSchema, 'userId' | 'desc' | 'img'>> = req.body;
+    const requestBody = req.body;
 
     const newPost = new PostModel(requestBody);
     const savedPost = await newPost.save();
@@ -14,9 +15,9 @@ export const createPost: RequestHandler = async (req, res) => {
   }
 };
 
-export const updatePost: RequestHandler<{ postId: string }> = async (req, res) => {
+export const updatePost: RequestHandler<PostPathParams, any, CreateOrUpdatePostRequestBody> = async (req, res) => {
   try {
-    const requestBody: Required<Pick<PostSchema, 'userId' | 'desc' | 'img'>> = req.body;
+    const requestBody = req.body;
     const { postId } = req.params;
 
     const searchedPost = await PostModel.findById(postId);
@@ -37,9 +38,9 @@ export const updatePost: RequestHandler<{ postId: string }> = async (req, res) =
   }
 };
 
-export const deletePost: RequestHandler<{ postId: string }> = async (req, res) => {
+export const deletePost: RequestHandler<PostPathParams, any, DeletePostRequestBody> = async (req, res) => {
   try {
-    const requestBody: Required<Pick<PostSchema, 'userId'>> = req.body;
+    const requestBody = req.body;
     const { postId } = req.params;
 
     const searchedPost = await PostModel.findById(postId);
@@ -58,7 +59,7 @@ export const deletePost: RequestHandler<{ postId: string }> = async (req, res) =
   }
 };
 
-export const getParticularPost: RequestHandler<{ postId: string }> = async (req, res) => {
+export const getParticularPost: RequestHandler<PostPathParams> = async (req, res) => {
   try {
     const { postId } = req.params;
 

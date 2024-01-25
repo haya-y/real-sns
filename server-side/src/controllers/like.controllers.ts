@@ -1,5 +1,6 @@
 import { RequestHandler } from 'express';
-import { PostModel, PostSchema } from '../models/Post';
+import { PostModel } from '../models/Post';
+import { DeletePostRequestBody, PostPathParams, PostQueryParams } from '../types/post.types';
 
 /**
  * update 'like' of a post
@@ -22,10 +23,7 @@ const addOrRemoveLike = async (alreadyLiked: boolean, postId: string, userId: st
   return updatedPost === null ? null : { likeNumber: (updatedPost.likes ?? []).length, isPushed: !alreadyLiked };
 };
 
-export const updateLikeStatus: RequestHandler<{ postId: string }, any, Required<Pick<PostSchema, 'userId'>>> = async (
-  req,
-  res,
-) => {
+export const updateLikeStatus: RequestHandler<PostPathParams, any, DeletePostRequestBody> = async (req, res) => {
   try {
     const { userId } = req.body;
     const { postId } = req.params;
@@ -45,7 +43,7 @@ export const updateLikeStatus: RequestHandler<{ postId: string }, any, Required<
   }
 };
 
-export const getLikeStatus: RequestHandler<{ postId: string }, any, any, { userId: string }> = async (req, res) => {
+export const getLikeStatus: RequestHandler<PostPathParams, any, any, PostQueryParams> = async (req, res) => {
   try {
     const { postId } = req.params;
     const { userId } = req.query;

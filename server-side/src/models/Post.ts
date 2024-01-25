@@ -1,13 +1,5 @@
 import mongoose from 'mongoose';
-
-export interface PostSchema {
-  userId: string;
-  desc?: string;
-  img?: string;
-  likes?: string[];
-  createdAt: Date;
-  updatedAt: Date;
-}
+import { PostSchema } from '../types/post.types';
 
 const postSchema = new mongoose.Schema<PostSchema>(
   {
