@@ -12,7 +12,7 @@ MERN (MongoDB, Express.js, React, Node.js)でフルスタック実装
 
 フロントエンドは React・TypeScript で実装し、CSS は BEM 記法に基づいて Styled Component を使用
 
-バックエンドは Node.js・Express.js で実装
+バックエンドは Node.js・Express.js・TypeScript で実装し、Webpack でファイルをバンドル
 
 データベースは MongoDB を使用し、mongoose を用いて Node.js からデータを操作
 
@@ -43,10 +43,6 @@ MERN (MongoDB, Express.js, React, Node.js)でフルスタック実装
 
 ### 直近の追加・修正予定
 
-- 各画像をデータベースへ保存し、本番環境に対応
-
-  - 現状ではローカル環境のみで API が対応
-
 - ユーザー検索機能の実装
 
 - 他のユーザーのフォロー、アンフォロー機能の実装
@@ -56,3 +52,7 @@ MERN (MongoDB, Express.js, React, Node.js)でフルスタック実装
 - ホーム画面にフォロー済みの友達の表示
 
   - 現状ではダミーを表示
+
+- 投稿時の画像をクラウドストレージへ保存
+
+  - 現状ではローカルサーバーに投稿画像を保存して対応
