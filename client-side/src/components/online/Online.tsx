@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { PUBLIC_FOLDER } from '../../constants/index';
+import { IMAGE_FOLDER } from '../../constants/index';
 import { User } from '../../types/User.types';
 import { StyledOnlineDiv } from './Online.styles';
 
@@ -12,7 +12,7 @@ export const Online = memo(({ user: { profilePicture, username } }: Props) => {
     <StyledOnlineDiv>
       <li className='rightbarFriend'>
         <div className='rightbarFriend-profileContainer'>
-          <img src={PUBLIC_FOLDER + profilePicture} alt='' className='rightbarFriend-profileContainer-img' />
+          <img src={IMAGE_FOLDER + profilePicture} alt='' className='rightbarFriend-profileContainer-img' />
           <span className='rightbarFriend-profileContainer-online'></span>
         </div>
         <span className='rightbarFriend-username'>{username}</span>

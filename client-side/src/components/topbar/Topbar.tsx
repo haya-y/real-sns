@@ -1,7 +1,7 @@
 import * as MUI from '@mui/icons-material';
 import { memo, useCallback, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { PUBLIC_FOLDER } from '../../constants';
+import { IMAGE_FOLDER } from '../../constants';
 import { AuthContext } from '../../redux/AuthContext';
 import { StyledTopbarDiv } from './Topbar.styles';
 import { LOGOUT } from '../../redux/types/AuthTypes';
@@ -48,7 +48,7 @@ export const Topbar = memo(() => {
               <img
                 className='topbarRight-icons-items-profile'
                 src={
-                  user?.profilePicture ? PUBLIC_FOLDER + user?.profilePicture : PUBLIC_FOLDER + '/person/noAvatar.png'
+                  user?.profilePicture ? IMAGE_FOLDER + user?.profilePicture : IMAGE_FOLDER + '/person/noAvatar.png'
                 }
                 alt='profile'
               />
