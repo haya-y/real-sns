@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
-import { PostModel } from '../models/Post';
-import { CreateOrUpdatePostRequestBody, DeletePostRequestBody, PostPathParams } from '../types/post.types';
+import { PostModel } from '../../models/Post.models';
+import { CreateOrUpdatePostRequestBody, DeletePostRequestBody, PostPathParams } from '../../types/post.types';
 
 export const createPost: RequestHandler<any, any, CreateOrUpdatePostRequestBody> = async (req, res) => {
   try {

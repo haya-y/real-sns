@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { UserModel } from '../models/User';
+import { UserModel } from '../models/User.models';
 import { LoginUserRequestBody, RegisterUserRequestBody } from '../types/auth.types';
 import { UserSchema } from '../types/user.types';
 

@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express';
-import { PostModel } from '../models/Post';
-import { DeletePostRequestBody, PostPathParams, PostQueryParams } from '../types/post.types';
+import { PostModel } from '../../models/Post.models';
+import { DeletePostRequestBody, PostPathParams, PostQueryParams } from '../../types/post.types';
 
 /**
  * update 'like' of a post

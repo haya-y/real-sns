@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express';
-import { PostModel } from '../models/Post';
-import { UserModel } from '../models/User';
-import { HomeTimelinePathParams, ProfileTimelinePathParams } from '../types/post.types';
+import { PostModel } from '../../models/Post.models';
+import { UserModel } from '../../models/User.models';
+import { HomeTimelinePathParams, ProfileTimelinePathParams } from '../../types/post.types';
 
 export const getTimelineOfProfile: RequestHandler<ProfileTimelinePathParams> = async (req, res) => {
   try {

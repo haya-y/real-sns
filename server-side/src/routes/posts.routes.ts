@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { getLikeStatus, updateLikeStatus } from '../controllers/like.controllers';
-import { createPost, deletePost, getParticularPost, updatePost } from '../controllers/post.controllers';
-import { getTimelineOfHome, getTimelineOfProfile } from '../controllers/timeline.controllers';
+import { getLikeStatus, updateLikeStatus } from '../controllers/post/like.controllers';
+import { createPost, deletePost, getParticularPost, updatePost } from '../controllers/post/post.controllers';
+import { getTimelineOfHome, getTimelineOfProfile } from '../controllers/post/timeline.controllers';
 
 const router = Router();
 
