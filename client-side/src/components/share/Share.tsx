@@ -2,7 +2,7 @@ import * as MUI from '@mui/icons-material';
 import React, { memo, useCallback, useContext, useRef, useState } from 'react';
 import { CreatedPost, createPost } from '../../api/post/PostApi';
 import { uploadImage } from '../../api/upload/UploadApi';
-import { PUBLIC_FOLDER } from '../../constants';
+import { IMAGE_FOLDER } from '../../constants';
 import { AuthContext } from '../../redux/AuthContext';
 import { StyledShareDiv } from './Share.styles';
 
@@ -44,7 +44,7 @@ export const Share = memo(() => {
       <div className='shareWrapper'>
         <div className='shareWrapper-top'>
           <img
-            src={user?.profilePicture ? PUBLIC_FOLDER + user?.profilePicture : PUBLIC_FOLDER + '/person/noAvatar.png'}
+            src={user?.profilePicture ? IMAGE_FOLDER + user?.profilePicture : IMAGE_FOLDER + '/person/noAvatar.png'}
             alt='profile'
             className='shareWrapper-top-profileImg'
           />

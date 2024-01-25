@@ -5,7 +5,7 @@ import { Rightbar } from '../../components/rightbar/Rightbar';
 import { Sidebar } from '../../components/sidebar/Sidebar';
 import { TimeLine } from '../../components/timeline/TimeLine';
 import { Topbar } from '../../components/topbar/Topbar';
-import { PUBLIC_FOLDER } from '../../constants';
+import { IMAGE_FOLDER } from '../../constants';
 import { User } from '../../types/User.types';
 import { StyledProfileDiv } from './Profile.styles';
 
@@ -31,13 +31,13 @@ export const Profile = () => {
           <div className='profile-right-top'>
             <div className='profile-right-top-cover'>
               <img
-                src={user?.coverPicture ? PUBLIC_FOLDER + user?.coverPicture : PUBLIC_FOLDER + '/event.jpeg'}
+                src={user?.coverPicture ? IMAGE_FOLDER + user?.coverPicture : IMAGE_FOLDER + '/event.jpeg'}
                 alt='background'
                 className='profile-right-top-cover-coverImg'
               />
               <img
                 src={
-                  user?.profilePicture ? PUBLIC_FOLDER + user?.profilePicture : PUBLIC_FOLDER + '/person/noAvatar.png'
+                  user?.profilePicture ? IMAGE_FOLDER + user?.profilePicture : IMAGE_FOLDER + '/person/noAvatar.png'
                 }
                 alt='profile'
                 className='profile-right-top-cover-userImg'

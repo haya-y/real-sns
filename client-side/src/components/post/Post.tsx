@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { format } from 'timeago.js';
 import { fetchLikeStatus, updateLike } from '../../api/post/PostApi';
 import { fetchUserById } from '../../api/user/UserApi';
-import { PUBLIC_FOLDER } from '../../constants';
+import { IMAGE_FOLDER } from '../../constants';
 import { AuthContext } from '../../redux/AuthContext';
 import { Post as PostType } from '../../types/Post.types';
 import { User } from '../../types/User.types';
@@ -59,8 +59,8 @@ export const Post = memo(({ post: { _id: postId, likes, userId, desc, img, creat
               <img
                 src={
                   user?.profilePicture
-                    ? PUBLIC_FOLDER + (user?.profilePicture ?? '')
-                    : PUBLIC_FOLDER + '/person/noAvatar.png'
+                    ? IMAGE_FOLDER + (user?.profilePicture ?? '')
+                    : IMAGE_FOLDER + '/person/noAvatar.png'
                 }
                 alt='post'
                 className='postWrapper-top-left-profileImg'
@@ -77,13 +77,13 @@ export const Post = memo(({ post: { _id: postId, likes, userId, desc, img, creat
         </div>
         <div className='postWrapper-center'>
           <span className='postWrapper-center-text'>{desc}</span>
-          {img && <img src={PUBLIC_FOLDER + img} alt='user post img' className='postWrapper-center-img' />}
+          {img && <img src={IMAGE_FOLDER + img} alt='user post img' className='postWrapper-center-img' />}
         </div>
         <div className='postWrapper-bottom' onClick={() => handleLike()}>
           <div className='postWrapper-bottom-left'>
             <img
               className='postWrapper-bottom-left-img'
-              src={PUBLIC_FOLDER + '/heart.png'}
+              src={IMAGE_FOLDER + '/heart.png'}
               alt='likeIcon'
               style={{ opacity: pushLike ? '0.5' : '1' }}
             />
