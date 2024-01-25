@@ -4,10 +4,12 @@ import { UserModel, UserSchema } from '../models/User';
 export const registerUser: RequestHandler = async (req, res) => {
   try {
     const requestBody: Pick<UserSchema, 'username' | 'email' | 'password'> = req.body;
+
     const newUser = await new UserModel(requestBody);
     const user = await newUser.save();
     return res.status(200).json(user);
   } catch (err) {
+    console.error(err);
     return res.status(500).json(err);
   }
 };
@@ -24,6 +26,7 @@ export const loginUser: RequestHandler = async (req, res) => {
 
     return res.status(200).json(user);
   } catch (err) {
+    console.error(err);
     return res.status(500).json(err);
   }
 };

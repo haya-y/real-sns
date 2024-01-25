@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-interface PostSchema {
+export interface PostSchema {
   userId: string;
   desc?: string;
   img?: string;

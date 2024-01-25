@@ -1,68 +1,21 @@
 import { Router } from 'express';
+import { createPost, deletePost, getParticularPost, updatePost } from '../controllers/post.controllers';
 import { PostModel } from '../models/Post';
 import { UserModel } from '../models/User';
 
 const router = Router();
 
 // create a post
-router.post('/', async (req, res) => {
-  const newPost = new PostModel(req.body);
-  try {
-    const savedPost = await newPost.save();
-    return res.status(200).json(savedPost);
-  } catch (err) {
-    return res.status(500).json(err);
-  }
-});
+router.post('/', createPost);
 
 // update a post
-router.put('/:id', async (req, res) => {
-  try {
-    const post = await PostModel.findById(req.params.id);
-    if (post === null) {
-      return res.status(404).json('指定したIDの投稿が見つかりませんでした');
-    }
-    if (post.userId === req.body.userId) {
-      await post.updateOne({
-        $set: req.body,
-      });
-      return res.status(200).json('Successfully posted');
-    } else {
-      return res.status(403).json('You can only update your posts.');
-    }
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json(err);
-  }
-});
+router.put('/:postId', updatePost);
 
 // delete a post
-router.delete('/:id', async (req, res) => {
-  try {
-    const post = await PostModel.findById(req.params.id);
-    if (post === null) {
-      return res.status(404).json('指定したIDの投稿が見つかりませんでした');
-    }
-    if (post.userId === req.body.userId) {
-      await post.deleteOne();
-      return res.status(200).json('Your post was successfully deleted');
-    } else {
-      return res.status(403).json('You can only delete existing post');
-    }
-  } catch (err) {
-    return res.status(403).json(err);
-  }
-});
+router.delete('/:postId', deletePost);
 
 // get a particular post
-router.get('/:id', async (req, res) => {
-  try {
-    const post = await PostModel.findById(req.params.id);
-    return res.status(200).json(post);
-  } catch (err) {
-    return res.status(403).json(err);
-  }
-});
+router.get('/:postId', getParticularPost);
 
 /**
  * update 'like' of a post
