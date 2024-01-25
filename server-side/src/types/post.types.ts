@@ -11,6 +11,14 @@ export interface PostPathParams {
   postId: string;
 }
 
+export interface ProfileTimelinePathParams {
+  username: string;
+}
+
+export interface HomeTimelinePathParams {
+  userId: string;
+}
+
 export interface PostQueryParams {
   userId: string;
 }
