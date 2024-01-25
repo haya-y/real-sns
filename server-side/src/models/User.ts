@@ -15,7 +15,7 @@ interface User {
   updatedAt: Date;
 }
 
-const UserSchema = new mongoose.Schema<User>(
+const userSchema = new mongoose.Schema<User>(
   {
     username: {
       type: String,
@@ -68,4 +68,4 @@ const UserSchema = new mongoose.Schema<User>(
   { timestamps: true },
 );
 
-export default mongoose.model('User', UserSchema);
+export const UserModel = mongoose.model('User', userSchema);

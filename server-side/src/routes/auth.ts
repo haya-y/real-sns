@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import User from '../models/User';
+import { UserModel } from '../models/User';
 
 const router = Router();
 
 // register user
 router.post('/register', async (req, res) => {
   try {
-    const newUser = await new User({
+    const newUser = await new UserModel({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
@@ -22,7 +22,7 @@ router.post('/register', async (req, res) => {
 // Login
 router.post('/login', async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await UserModel.findOne({ email: req.body.email });
     if (!user) return res.status(404).send('The user does not exist');
 
     const vaildedPassword = req.body.password === user.password;

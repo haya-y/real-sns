@@ -9,7 +9,7 @@ interface Post {
   updatedAt: Date;
 }
 
-const PostSchema = new mongoose.Schema<Post>(
+const postSchema = new mongoose.Schema<Post>(
   {
     userId: {
       type: String,
@@ -30,4 +30,4 @@ const PostSchema = new mongoose.Schema<Post>(
   { timestamps: true },
 );
 
-export default mongoose.model('Post', PostSchema);
+export const PostModel = mongoose.model('Post', postSchema);

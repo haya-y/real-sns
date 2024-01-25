@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import Post from '../models/Post';
-import User from '../models/User';
+import { PostModel } from '../models/Post';
+import { UserModel } from '../models/User';
 
 const router = Router();
 
 // create a post
 router.post('/', async (req, res) => {
-  const newPost = new Post(req.body);
+  const newPost = new PostModel(req.body);
   try {
     const savedPost = await newPost.save();
     return res.status(200).json(savedPost);
@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
 // update a post
 router.put('/:id', async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await PostModel.findById(req.params.id);
     if (post === null) {
       return res.status(404).json('指定したIDの投稿が見つかりませんでした');
     }
@@ -39,7 +39,7 @@ router.put('/:id', async (req, res) => {
 // delete a post
 router.delete('/:id', async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await PostModel.findById(req.params.id);
     if (post === null) {
       return res.status(404).json('指定したIDの投稿が見つかりませんでした');
     }
@@ -57,7 +57,7 @@ router.delete('/:id', async (req, res) => {
 // get a particular post
 router.get('/:id', async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await PostModel.findById(req.params.id);
     return res.status(200).json(post);
   } catch (err) {
     return res.status(403).json(err);
@@ -73,7 +73,7 @@ router.get('/:id', async (req, res) => {
  */
 const updateLikeStatus = async (alreadyLiked: boolean, postId: string, userId: string) => {
   const updateOperator = alreadyLiked ? '$pull' : '$push';
-  const updatedPost = await Post.findByIdAndUpdate(
+  const updatedPost = await PostModel.findByIdAndUpdate(
     postId,
     {
       [updateOperator]: {
@@ -88,7 +88,7 @@ const updateLikeStatus = async (alreadyLiked: boolean, postId: string, userId: s
 // add or remove 'like' of a post
 router.put('/:id/like', async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await PostModel.findById(req.params.id);
     if (post === null) {
       return res.status(404).json('指定したIDの投稿が見つかりませんでした');
     }
@@ -105,7 +105,7 @@ router.put('/:id/like', async (req, res) => {
 // get 'like' status of a post
 router.get('/:id/like', async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await PostModel.findById(req.params.id);
     if (post === null) {
       return res.status(404).json('指定したIDの投稿が見つかりませんでした');
     }
@@ -119,11 +119,11 @@ router.get('/:id/like', async (req, res) => {
 // get posts of timeline of profile page
 router.get('/profile/:username', async (req, res) => {
   try {
-    const user = await User.findOne({ username: req.params.username });
+    const user = await UserModel.findOne({ username: req.params.username });
     if (user === null) {
       return res.status(404).json('指定したユーザーが見つかりませんでした');
     }
-    const posts = await Post.find({ userId: user._id });
+    const posts = await PostModel.find({ userId: user._id });
     return res.status(200).json(posts);
   } catch (err) {
     return res.status(500).json(err);
@@ -133,15 +133,15 @@ router.get('/profile/:username', async (req, res) => {
 // get posts of timeline
 router.get('/timeline/:userId', async (req, res) => {
   try {
-    const currentUser = await User.findById(req.params.userId);
+    const currentUser = await UserModel.findById(req.params.userId);
     if (currentUser === null) {
       return res.status(404).json('指定したユーザーが見つかりませんでした');
     }
-    const userPosts = await Post.find({ userId: currentUser._id });
+    const userPosts = await PostModel.find({ userId: currentUser._id });
     // get all posts of following friends
     const friendPosts = await Promise.all(
       (currentUser.followings ?? []).map((friendId) => {
-        return Post.find({ userId: friendId });
+        return PostModel.find({ userId: friendId });
       }),
     );
     return res.status(200).json(userPosts.concat(...friendPosts));
