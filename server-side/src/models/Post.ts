@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-interface Post {
+interface PostSchema {
   userId: string;
   desc?: string;
   img?: string;
@@ -9,7 +9,7 @@ interface Post {
   updatedAt: Date;
 }
 
-const postSchema = new mongoose.Schema<Post>(
+const postSchema = new mongoose.Schema<PostSchema>(
   {
     userId: {
       type: String,

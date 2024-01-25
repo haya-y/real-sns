@@ -20,6 +20,16 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexpo
 
 /***/ }),
 
+/***/ "./src/controllers/auth.controllers.ts":
+/*!*********************************************!*\
+  !*** ./src/controllers/auth.controllers.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.loginUser = exports.registerUser = void 0;\nconst User_1 = __webpack_require__(/*! ../models/User */ \"./src/models/User.ts\");\nconst registerUser = async (req, res) => {\n    try {\n        const requestBody = req.body;\n        const newUser = await new User_1.UserModel(requestBody);\n        const user = await newUser.save();\n        return res.status(200).json(user);\n    }\n    catch (err) {\n        return res.status(500).json(err);\n    }\n};\nexports.registerUser = registerUser;\nconst loginUser = async (req, res) => {\n    try {\n        const requestBody = req.body;\n        const user = await User_1.UserModel.findOne({ email: requestBody.email });\n        if (!user)\n            return res.status(404).send('The user does not exist');\n        const isValidPassword = requestBody.password === user.password;\n        if (!isValidPassword)\n            return res.status(400).json('password is wrong');\n        return res.status(200).json(user);\n    }\n    catch (err) {\n        return res.status(500).json(err);\n    }\n};\nexports.loginUser = loginUser;\n\n\n//# sourceURL=webpack://real-sns/./src/controllers/auth.controllers.ts?");
+
+/***/ }),
+
 /***/ "./src/models/Post.ts":
 /*!****************************!*\
   !*** ./src/models/Post.ts ***!
@@ -46,7 +56,7 @@ eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {
   \****************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst express_1 = __webpack_require__(/*! express */ \"express\");\nconst User_1 = __webpack_require__(/*! ../models/User */ \"./src/models/User.ts\");\nconst router = (0, express_1.Router)();\n// register user\nrouter.post('/register', async (req, res) => {\n    try {\n        const newUser = await new User_1.UserModel({\n            username: req.body.username,\n            email: req.body.email,\n            password: req.body.password,\n        });\n        const user = await newUser.save();\n        return res.status(200).json(user);\n    }\n    catch (err) {\n        return res.status(500).json(err);\n    }\n});\n// Login\nrouter.post('/login', async (req, res) => {\n    try {\n        const user = await User_1.UserModel.findOne({ email: req.body.email });\n        if (!user)\n            return res.status(404).send('The user does not exist');\n        const vaildedPassword = req.body.password === user.password;\n        if (!vaildedPassword)\n            return res.status(400).json('password is wrong');\n        return res.status(200).json(user);\n    }\n    catch (err) {\n        return res.status(500).json(err);\n    }\n});\nexports[\"default\"] = router;\n\n\n//# sourceURL=webpack://real-sns/./src/routes/auth.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst express_1 = __webpack_require__(/*! express */ \"express\");\nconst auth_controllers_1 = __webpack_require__(/*! ../controllers/auth.controllers */ \"./src/controllers/auth.controllers.ts\");\nconst router = (0, express_1.Router)();\n// register user\nrouter.post('/register', auth_controllers_1.registerUser);\n// Login\nrouter.post('/login', auth_controllers_1.loginUser);\nexports[\"default\"] = router;\n\n\n//# sourceURL=webpack://real-sns/./src/routes/auth.ts?");
 
 /***/ }),
 
