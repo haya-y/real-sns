@@ -1,6 +1,21 @@
 import mongoose from 'mongoose';
 
-const UserSchema = new mongoose.Schema(
+interface User {
+  username: string;
+  email: string;
+  password: string;
+  profilePicture?: string;
+  coverPicture?: string;
+  followers?: string[];
+  followings?: string[];
+  isAdmin?: boolean;
+  desc?: string;
+  city?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const UserSchema = new mongoose.Schema<User>(
   {
     username: {
       type: String,
@@ -50,7 +65,6 @@ const UserSchema = new mongoose.Schema(
       max: 50,
     },
   },
-
   { timestamps: true },
 );
 

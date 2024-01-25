@@ -1,6 +1,15 @@
 import mongoose from 'mongoose';
 
-const PostSchema = new mongoose.Schema(
+interface Post {
+  userId: string;
+  desc?: string;
+  img?: string;
+  likes?: string[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const PostSchema = new mongoose.Schema<Post>(
   {
     userId: {
       type: String,

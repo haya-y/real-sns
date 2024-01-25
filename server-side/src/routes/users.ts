@@ -60,7 +60,7 @@ router.put('/:id/follow', async (req, res) => {
       if (targetUser === null || sourceUser === null) {
         return res.status(404).json('指定したユーザーが見つかりませんでした');
       }
-      if (!targetUser.followers.includes(req.body.userId)) {
+      if (!(targetUser.followers ?? []).includes(req.body.userId)) {
         await targetUser.updateOne({
           $push: {
             followers: req.body.userId,
@@ -92,7 +92,7 @@ router.put('/:id/unfollow', async (req, res) => {
       if (targetUser === null || sourceUser === null) {
         return res.status(404).json('指定したユーザーが見つかりませんでした');
       }
-      if (targetUser.followers.includes(req.body.userId)) {
+      if ((targetUser.followers ?? []).includes(req.body.userId)) {
         await targetUser.updateOne({
           $pull: {
             followers: req.body.userId,

@@ -82,7 +82,7 @@ const updateLikeStatus = async (alreadyLiked: boolean, postId: string, userId: s
     },
     { returnDocument: 'after' },
   );
-  return updatedPost === null ? null : { likeNumber: updatedPost.likes.length, isPushed: !alreadyLiked };
+  return updatedPost === null ? null : { likeNumber: (updatedPost.likes ?? []).length, isPushed: !alreadyLiked };
 };
 
 // add or remove 'like' of a post
@@ -92,7 +92,7 @@ router.put('/:id/like', async (req, res) => {
     if (post === null) {
       return res.status(404).json('指定したIDの投稿が見つかりませんでした');
     }
-    const alreadyLiked = post.likes.includes(req.body.userId);
+    const alreadyLiked = (post.likes ?? []).includes(req.body.userId);
     const result = await updateLikeStatus(alreadyLiked, req.params.id, req.body.userId);
     return result === null
       ? res.status(404).json('投稿から指定したユーザーが見つかりませんでした')
@@ -109,7 +109,7 @@ router.get('/:id/like', async (req, res) => {
     if (post === null) {
       return res.status(404).json('指定したIDの投稿が見つかりませんでした');
     }
-    const alreadyLiked = post.likes.includes(req.query.userId);
+    const alreadyLiked = (post.likes ?? []).includes(String(req.query.userId));
     return res.status(200).json(alreadyLiked);
   } catch (err) {
     return res.status(500).json(err);
@@ -140,7 +140,7 @@ router.get('/timeline/:userId', async (req, res) => {
     const userPosts = await Post.find({ userId: currentUser._id });
     // get all posts of following friends
     const friendPosts = await Promise.all(
-      currentUser.followings.map((friendId) => {
+      (currentUser.followings ?? []).map((friendId) => {
         return Post.find({ userId: friendId });
       }),
     );
