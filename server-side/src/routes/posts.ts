@@ -48,7 +48,7 @@ router.get('/timeline/:userId', async (req, res) => {
     const userPosts = await PostModel.find({ userId: currentUser._id });
     // get all posts of following friends
     const friendPosts = await Promise.all(
-      (currentUser.followings ?? []).map((friendId) => {
+      (currentUser.followings ?? []).map((friendId: any) => {
         return PostModel.find({ userId: friendId });
       }),
     );

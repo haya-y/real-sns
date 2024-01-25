@@ -1,9 +1,11 @@
 import { RequestHandler } from 'express';
-import { UserModel, UserSchema } from '../models/User';
+import { UserModel } from '../models/User';
+import { LoginUserRequestBody, RegisterUserRequestBody } from '../types/auth.types';
+import { UserSchema } from '../types/user.types';
 
-export const registerUser: RequestHandler = async (req, res) => {
+export const registerUser: RequestHandler<any, any, RegisterUserRequestBody> = async (req, res) => {
   try {
-    const requestBody: Pick<UserSchema, 'username' | 'email' | 'password'> = req.body;
+    const requestBody = req.body;
 
     const newUser = await new UserModel(requestBody);
     const user = await newUser.save();
@@ -14,9 +16,9 @@ export const registerUser: RequestHandler = async (req, res) => {
   }
 };
 
-export const loginUser: RequestHandler = async (req, res) => {
+export const loginUser: RequestHandler<any, any, LoginUserRequestBody> = async (req, res) => {
   try {
-    const requestBody: Pick<UserSchema, 'email' | 'password'> = req.body;
+    const requestBody = req.body;
 
     const user = await UserModel.findOne({ email: requestBody.email });
     if (!user) return res.status(404).send('The user does not exist');
