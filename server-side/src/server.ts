@@ -3,10 +3,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import path from 'path';
 import { DEV_CLIENT_SIDE_BASE_URL, MONGO_URL, PROD_CLIENT_SIDE_BASE_URL } from './constants';
-import authRoutes from './routes/auth';
-import postRoute from './routes/posts';
-import uploadRoute from './routes/upload';
-import userRoute from './routes/users';
+import authRoutes from './routes/auth.routes';
+import postRoute from './routes/posts.routes';
+import uploadRoute from './routes/upload.routes';
+import userRoute from './routes/users.routes';
 
 const app = express();
 const PORT = 4000;

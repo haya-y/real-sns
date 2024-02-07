@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import User from '../models/User';
+import { UserModel } from '../models/User.models';
 
 const router = Router();
 
@@ -7,7 +7,7 @@ const router = Router();
 router.put('/:id', async (req, res) => {
   if (req.body.userId === req.params.id || req.body.isAdmin) {
     try {
-      const user = await User.findByIdAndUpdate(req.params.id, {
+      const user = await UserModel.findByIdAndUpdate(req.params.id, {
         $set: req.body,
       });
       return res.status(200).json('Updated user info');
@@ -23,7 +23,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   if (req.body.userId === req.params.id || req.body.isAdmin) {
     try {
-      const user = await User.findByIdAndDelete(req.params.id);
+      const user = await UserModel.findByIdAndDelete(req.params.id);
       res.status(200).json('Deleted user info');
     } catch (err) {
       return res.status(500).json(err);
@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
   const userId = req.query.userId;
   const username = req.query.username;
   try {
-    const user = userId ? await User.findById(userId) : await User.findOne({ username });
+    const user = userId ? await UserModel.findById(userId) : await UserModel.findOne({ username });
     if (user === null) {
       return res.status(404).json('指定したユーザーが見つかりませんでした');
     }
@@ -55,12 +55,12 @@ router.get('/', async (req, res) => {
 router.put('/:id/follow', async (req, res) => {
   if (req.body.userId !== req.params.id) {
     try {
-      const targetUser = await User.findById(req.params.id);
-      const sourceUser = await User.findById(req.body.userId);
+      const targetUser = await UserModel.findById(req.params.id);
+      const sourceUser = await UserModel.findById(req.body.userId);
       if (targetUser === null || sourceUser === null) {
         return res.status(404).json('指定したユーザーが見つかりませんでした');
       }
-      if (!targetUser.followers.includes(req.body.userId)) {
+      if (!(targetUser.followers ?? []).includes(req.body.userId)) {
         await targetUser.updateOne({
           $push: {
             followers: req.body.userId,
@@ -87,12 +87,12 @@ router.put('/:id/follow', async (req, res) => {
 router.put('/:id/unfollow', async (req, res) => {
   if (req.body.userId !== req.params.id) {
     try {
-      const targetUser = await User.findById(req.params.id);
-      const sourceUser = await User.findById(req.body.userId);
+      const targetUser = await UserModel.findById(req.params.id);
+      const sourceUser = await UserModel.findById(req.body.userId);
       if (targetUser === null || sourceUser === null) {
         return res.status(404).json('指定したユーザーが見つかりませんでした');
       }
-      if (targetUser.followers.includes(req.body.userId)) {
+      if ((targetUser.followers ?? []).includes(req.body.userId)) {
         await targetUser.updateOne({
           $pull: {
             followers: req.body.userId,
